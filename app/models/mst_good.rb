@@ -1,0 +1,2 @@
+class MstGood < ApplicationRecord
+end
