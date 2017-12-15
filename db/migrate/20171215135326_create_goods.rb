@@ -1,7 +1,7 @@
-class CreateMstGoods < ActiveRecord::Migration[5.1]
+class CreateGoods < ActiveRecord::Migration[5.1]
   def change
-    create_table :mst_goods, primary_key: 'good_id' do |t|
-#      t.string :good_id, limit: 13
+    create_table :goods, primary_key: "goods_id" do |t|
+      #t.integer :goods_id
       t.string :jan_cd, limit: 13
       t.string :name_jp
       t.string :name_cn

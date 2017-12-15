@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  good_id: MyString
+  goods_id: 1
   jan_cd: MyString
   name_jp: MyString
   name_cn: MyString
@@ -10,7 +10,7 @@ one:
   image_path: MyString
 
 two:
-  good_id: MyString
+  goods_id: 1
   jan_cd: MyString
   name_jp: MyString
   name_cn: MyString
