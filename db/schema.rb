@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171215141142) do
+ActiveRecord::Schema.define(version: 20171219130859) do
 
-  create_table "customers", primary_key: "customer_id", force: :cascade do |t|
+  create_table "customers", force: :cascade do |t|
     t.string "name"
     t.string "snsid"
     t.string "note"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20171215141142) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "goods", primary_key: "goods_id", force: :cascade do |t|
+  create_table "goods", force: :cascade do |t|
     t.string "jan_cd", limit: 13
     t.string "name_jp"
     t.string "name_cn"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20171215141142) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "order_details", primary_key: "order_detail_id", force: :cascade do |t|
+  create_table "order_details", force: :cascade do |t|
     t.integer "order_id"
     t.integer "good_id"
     t.date "order_time"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20171215141142) do
     t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
-  create_table "payments", primary_key: "payment_id", force: :cascade do |t|
+  create_table "payments", force: :cascade do |t|
     t.integer "order_id"
     t.integer "customer_id"
     t.integer "amounts"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20171215141142) do
     t.index ["order_id"], name: "index_payments_on_order_id"
   end
 
-  create_table "users", primary_key: "user_id", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "account"
     t.string "password"
     t.datetime "created_at", null: false

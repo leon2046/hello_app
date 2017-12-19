@@ -1,8 +1,8 @@
 class CreatePayments < ActiveRecord::Migration[5.1]
   def change
-    create_table :payments, primary_key: "payment_id" do |t|
-      t.references :order, foreign_key: true
-      t.references :customer, foreign_key: true
+    create_table :payments do |t|
+      t.belongs_to :order, index: true
+      t.belongs_to :customer, index: true
       t.integer :amounts
       t.date :payment_date
       t.string :payment_method

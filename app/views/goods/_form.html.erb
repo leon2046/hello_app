@@ -1,0 +1,47 @@
+<%= form_with(model: good, local: true) do |form| %>
+  <% if good.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(good.errors.count, "error") %> prohibited this good from being saved:</h2>
+
+      <ul>
+      <% good.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :jan_cd %>
+    <%= form.telephone_field :jan_cd, id: :good_jan_cd,  maxlength: 13%>
+  </div>
+
+  <div class="field">
+    <%= form.label :name_jp %>
+    <%= form.text_field :name_jp, id: :good_name_jp %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name_cn %>
+    <%= form.text_field :name_cn, id: :good_name_cn %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price_jpy %>
+    <%= form.number_field :price_jpy, id: :good_price_jpy %>
+  </div>
+
+  <div class="field">
+    <%= form.label :profit_rate %>
+    <%= form.number_field :profit_rate, id: :good_profit_rate, max: 100 %>%
+  </div>
+
+  <div class="field">
+    <%= form.label :image_path %>
+    <%= form.text_field :image_path, id: :good_image_path %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

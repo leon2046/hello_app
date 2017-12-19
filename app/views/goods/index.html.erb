@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Goods</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= t('.jan_cd') %></th>
+      <th><%= t('.name_jp') %></th>
+      <th><%= t('.name_cn') %></th>
+      <th><%= t('.price_jpy') %></th>
+      <th><%= t('.profit_rate') %></th>
+      <th><%= t('.image_path') %></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @goods.each do |good| %>
+      <tr>
+        <td><%= good.jan_cd %></td>
+        <td><%= good.name_jp %></td>
+        <td><%= good.name_cn %></td>
+        <td><%= good.price_jpy %></td>
+        <td><%= good.profit_rate %>%</td>
+        <td><%= good.image_path %></td>
+        <td><%= link_to 'Show', good %></td>
+        <td><%= link_to 'Edit', edit_good_path(good) %></td>
+        <td><%= link_to 'Destroy', good, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Good', new_good_path %>

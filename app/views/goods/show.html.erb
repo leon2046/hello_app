@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= t('.jan_cd') %>:</strong>
+  <%= @good.jan_cd %>
+</p>
+
+<p>
+  <strong><%= t('.name_jp') %>:</strong>
+  <%= @good.name_jp %>
+</p>
+
+<p>
+  <strong><%= t('.name_cn') %>:</strong>
+  <%= @good.name_cn %>
+</p>
+
+<p>
+  <strong><%= t('.price_jpy') %></strong>
+  <%= @good.price_jpy %>
+</p>
+
+<p>
+  <strong><%= t('.profit_rate') %>:</strong>
+  <%= @good.profit_rate %>
+</p>
+
+<p>
+  <strong><%= t('.image_path') %>:</strong>
+  <%= @good.image_path %>
+</p>
+
+<%= link_to 'Edit', edit_good_path(@good) %> |
+<%= link_to 'Back', goods_path %>
