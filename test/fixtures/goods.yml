@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  goods_id: 1
+  jan_cd: MyString
+  name_jp: MyString
+  name_cn: MyString
+  price_jpy: 1
+  profit_rate: 1
+  image_path: MyString
+
+two:
+  goods_id: 1
+  jan_cd: MyString
+  name_jp: MyString
+  name_cn: MyString
+  price_jpy: 1
+  profit_rate: 1
+  image_path: MyString
