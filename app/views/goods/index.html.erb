@@ -1,37 +1,48 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Goods</h1>
-
-<table>
+<%- model_class = Good -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th><%= t('.jan_cd') %></th>
-      <th><%= t('.name_jp') %></th>
-      <th><%= t('.name_cn') %></th>
-      <th><%= t('.price_jpy') %></th>
-      <th><%= t('.profit_rate') %></th>
-      <th><%= t('.image_path') %></th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:jan_cd) %></th>
+      <th><%= model_class.human_attribute_name(:name_jp) %></th>
+      <th><%= model_class.human_attribute_name(:name_cn) %></th>
+      <th><%= model_class.human_attribute_name(:price_jpy) %></th>
+      <th><%= model_class.human_attribute_name(:profit_rate) %></th>
+      <th><%= model_class.human_attribute_name(:image_path) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @goods.each do |good| %>
       <tr>
+        <td><%= link_to good.id, good_path(good) %></td>
         <td><%= good.jan_cd %></td>
         <td><%= good.name_jp %></td>
         <td><%= good.name_cn %></td>
         <td><%= good.price_jpy %></td>
-        <td><%= good.profit_rate %>%</td>
-        <td><%= good.image_path %></td>
-        <td><%= link_to 'Show', good %></td>
-        <td><%= link_to 'Edit', edit_good_path(good) %></td>
-        <td><%= link_to 'Destroy', good, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= good.profit_rate %></td>
+        <td><%= image_tag good.image_path%></td>
+        <td><%= good.created_at.strftime("%m/%d/%Y") %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      good_path(good), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_good_path(good), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      good_path(good),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Good', new_good_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_good_path,
+            :class => 'btn btn-primary' %>

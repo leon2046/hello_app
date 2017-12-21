@@ -1,47 +1,71 @@
-<%= form_with(model: good, local: true) do |form| %>
-  <% if good.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(good.errors.count, "error") %> prohibited this good from being saved:</h2>
+<%= form_for @good, :html => { :class => "form-horizontal good" } do |f| %>
 
-      <ul>
-      <% good.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @good.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@good.errors.count, "error") %> prohibited this good from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @good.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :jan_cd %>
-    <%= form.telephone_field :jan_cd, id: :good_jan_cd,  maxlength: 13%>
+  <div class="form-group">
+    <%= f.label :jan_cd, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :jan_cd, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:jan_cd) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :name_jp, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name_jp, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:name_jp) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :name_cn, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name_cn, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:name_cn) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :price_jpy, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :price_jpy, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:price_jpy) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :profit_rate, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :profit_rate, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:profit_rate) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :image_path, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :image_path, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:image_path) %>
   </div>
 
-  <div class="field">
-    <%= form.label :name_jp %>
-    <%= form.text_field :name_jp, id: :good_name_jp %>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                goods_path, :class => 'btn btn-default' %>
+      <%= link_to 'QueryGood','#', :id =>'rakuten_query', :class => 'btn btn-default'%>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :name_cn %>
-    <%= form.text_field :name_cn, id: :good_name_cn %>
-  </div>
-
-  <div class="field">
-    <%= form.label :price_jpy %>
-    <%= form.number_field :price_jpy, id: :good_price_jpy %>
-  </div>
-
-  <div class="field">
-    <%= form.label :profit_rate %>
-    <%= form.number_field :profit_rate, id: :good_profit_rate, max: 100 %>%
-  </div>
-
-  <div class="field">
-    <%= form.label :image_path %>
-    <%= form.text_field :image_path, id: :good_image_path %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= javascript_include_tag "good/goods" %>
 <% end %>

@@ -8,6 +8,7 @@ module RakutenWebServiceHelper
   @@url = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706"
 
   def queryItem(keyword)
+    puts keyword
     json = RestClient.get(@@url, {params: {
                                             'format' => 'json',
                                             'applicationId' => @@applicationId,
@@ -19,6 +20,9 @@ module RakutenWebServiceHelper
 
     resultList = []
     result = JSON.parse(json)
+
+    puts result
+
     result['Items'].each do |map|
       resultList.push({
         'itemName' => map['Item']['itemName'],
