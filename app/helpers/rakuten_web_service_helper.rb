@@ -3,7 +3,7 @@ module RakutenWebServiceHelper
   require 'json'
 
   @@applicationId = '1024174919872416244'
-  @@hits = 3
+  @@hits = 6
   @@page = 1
   @@url = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706"
 
