@@ -1,9 +1,10 @@
 $(document).ready(function() {
   $('#name_jp_rakuten_query, #jan_cd_rakuten_query').click(function() {
     var $table = $(".bs-example-modal-sm .table");
-    $table.empty();
-    $table.append($('<tr><td>Loading...</td></tr>'));
-    $(".bs-example-modal-sm").modal('show');
+    $table.empty().append($('<tr><td>Loading...</td></tr>'));
+
+    var $modal = $(".bs-example-modal-sm");
+    $modal.modal('show');
 
     var keyword = $('#good_jan_cd').val() || $('#good_name_jp').val();
     $.get('/rakuten/query', {
@@ -25,7 +26,7 @@ $(document).ready(function() {
             $('#good_name_jp').val(rowData.itemName);
             $('#good_price_jpy').val(rowData.itemPrice);
             $('#good_image_path').val(rowData.imageUrl);
-            $(".bs-example-modal-sm").modal('hide');
+            $modal.modal('hide');
           });
       });
 
