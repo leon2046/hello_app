@@ -49,9 +49,9 @@
         <a class="navbar-brand" href="#">HelloApp</a>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li><%= link_to "Link1", "/path1"  %></li>
-            <li><%= link_to "Link2", "/path2"  %></li>
-            <li><%= link_to "Link3", "/path3"  %></li>
+            <li><%= link_to "Goods", :controller => "goods", :action => "index"  %></li>
+            <li><%= link_to "Customers", :controller => "customers", :action => "index" %></li>
+            <li><%= link_to "Orders", :controller => "orders", :action => "index"  %></li>
           </ul>
         </div>
       </div>
@@ -67,6 +67,7 @@
 
       <footer>
         <p>&copy; Company 2017</p>
+        <%= link_to "TOP", :controller => "top", :action => "index" %>
       </footer>
 
     </div> <!-- /container -->

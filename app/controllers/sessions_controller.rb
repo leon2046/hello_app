@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
-  def new
+  def login
   end
 
-  def create
+  def authorize
     user = User.find_by(account: params[:session][:account].downcase)
     if user #&& user.authenticate(params[:session][:password])
       # ユーザーログイン後にユーザー情報のページにリダイレクトする
@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       redirect_to new_good_path
     else
       flash.now[:danger] = 'Invalid email/password combination'
-      render 'new'
+      render 'login'
     end
   end
 

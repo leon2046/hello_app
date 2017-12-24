@@ -1,3 +1,4 @@
 class Order < ApplicationRecord
-  has_many :orderDetails
+  belongs_to :customer
+  has_many :order_detail
 end

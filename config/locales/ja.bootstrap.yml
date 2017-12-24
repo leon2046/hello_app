@@ -16,6 +16,7 @@ ja:
       destroy: "Delete"
       new: "New"
       edit: "Edit"
+      addOrder: "Add Order"
     titles:
       edit: "Edit %{model}"
       save: "Save %{model}"

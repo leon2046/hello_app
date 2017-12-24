@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
-  before_action :logged_in_user, except: [:new, :create]
+  before_action :logged_in_user, except: [:login, :authorize]
 
   def hello
     render html: "hello, world!"

@@ -1,32 +1,12 @@
-<%- model_class = Customer -%>
+<%- model_class = Order -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @customer.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:snsid) %>:</strong></dt>
-  <dd><%= @customer.snsid %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:note) %>:</strong></dt>
-  <dd><%= @customer.note %></dd>
-</dl>
-
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              customers_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_customer_path(@customer), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              customer_path(@customer),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-
-<h2>All Orders</h2>
 <table class="table table-striped">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:order_id) %></th>
+      <th><%= model_class.human_attribute_name(:customer) %></th>
       <th><%= model_class.human_attribute_name(:note) %></th>
       <th><%= model_class.human_attribute_name(:status) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
@@ -34,9 +14,10 @@
     </tr>
   </thead>
   <tbody>
-    <% @customer.orders.each do |order| %>
+    <% @orders.each do |order| %>
       <tr>
         <td><%= link_to order.id, order_path(order) %></td>
+        <td><%= order.customer.name %></td>
         <td><%= order.note %></td>
         <td><%= order.status %></td>
         <td><%= order.created_at.strftime("%m/%d/%Y") %></td>
@@ -55,3 +36,7 @@
     <% end %>
   </tbody>
 </table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_order_path,
+            :class => 'btn btn-primary' %>

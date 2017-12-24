@@ -21,6 +21,10 @@ class GoodsController < ApplicationController
   def edit
   end
 
+  # GET /goods/query
+  def query
+    render :json => Good.goodsNameLike(params[:keyword])
+  end
   # POST /goods
   # POST /goods.json
   def create

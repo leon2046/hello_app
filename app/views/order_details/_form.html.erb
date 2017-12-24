@@ -1,0 +1,89 @@
+<%= form_for @order_detail, :html => { :class => "form-horizontal order_detail" } do |f| %>
+
+  <% if @order_detail.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@order_detail.errors.count, "error") %> prohibited this order_detail from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @order_detail.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :order_id, :class => 'form-control' %>
+
+  <div class="form-group">
+    <%= f.label :good_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <div id="goodIdDropdownMenu" class="dropdown">
+        <ul class="dropdown-menu" style="width:100%">
+
+        </ul>
+        <div class="input-group">
+          <%= f.hidden_field :good_id, :class => 'form-control' %>
+          <%= f.fields_for :good, @order_detail.good  do |g| %>
+              <%= g.text_field :name_jp, :class => 'form-control' %>
+          <% end %>
+          <span class="input-group-btn">
+            <button id="goodsQueryButton" class="btn btn-default" type="button">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </span>
+        </div><!-- /input-group -->
+      </div>
+
+    </div>
+    <%=f.error_span(:good_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :order_time, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :order_time, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:order_time) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :quantity, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :quantity, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:quantity) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :purchase_price, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :purchase_price, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:purchase_price) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :selling_price, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :selling_price, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:selling_price) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :order_status, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :order_status, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:order_status) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                order_details_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>
+
+<%= javascript_include_tag "order/orders" %>
