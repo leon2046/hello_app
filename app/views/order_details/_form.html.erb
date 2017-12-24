@@ -43,7 +43,7 @@
   <div class="form-group">
     <%= f.label :order_time, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :order_time, :class => 'form-control' %>
+      <%= f.text_field :order_time, :value => @order_detail.order_time ? @order_detail.order_time : Time.now.strftime("%Y-%m-%d"), :class => 'form-control' %>
     </div>
     <%=f.error_span(:order_time) %>
   </div>

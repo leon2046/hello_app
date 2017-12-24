@@ -2,49 +2,40 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:good_id) %></th>
-      <th><%= model_class.human_attribute_name(:good_id) %></th>
-      <th><%= model_class.human_attribute_name(:order_time) %></th>
-      <th><%= model_class.human_attribute_name(:quantity) %></th>
-      <th><%= model_class.human_attribute_name(:purchase_price) %></th>
-      <th><%= model_class.human_attribute_name(:selling_price) %></th>
-      <th><%= model_class.human_attribute_name(:order_status) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @order_details.each do |order_detail| %>
-      <tr>
-        <td><%= link_to order_detail.id, order_detail_path(order_detail) %></td>
-        <td><%= order_detail.good_id %></td>
-        <td><%= order_detail.good.name_jp %></td>
-        <td><%= order_detail.order_time %></td>
-        <td><%= order_detail.quantity %></td>
-        <td><%= order_detail.purchase_price %></td>
-        <td><%= order_detail.selling_price %></td>
-        <td><%= order_detail.order_status %></td>
-        <td><%= order_detail.created_at.strftime("%m/%d/%Y") %></td>
-        <td>
-          <%= link_to t('.show', :default => t("helpers.links.show")),
-                      order_detail_path(order_detail), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_order_detail_path(order_detail), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      order_detail_path(order_detail),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_order_detail_path,
-            :class => 'btn btn-primary' %>
+new_order_detail_path,
+:class => 'btn btn-primary' %>
+
+<hr/>
+
+<% @order_details.each do |detail| %>
+  <div class="col-xs-12 list-group-item" style="padding:5px;">
+    <span class="badge"><%= detail.created_at.strftime("%Y/%m/%d") %></span>
+    <div class="col-xs-12">
+      <p>
+        <span class="label label-info">Order Id: <%= link_to detail.order.id, order_path(detail.order) %></span>
+        <span class="label label-info">Detail Id: <%= link_to detail.id, order_detail_path(detail) %></span>
+      </p>
+    </div>
+    <div class="col-xs-12">
+      <% good = detail.good %>
+      <p><%= good.name_jp %></p>
+      <p><%= good.name_cn %></p>
+    </div>
+    <div class="col-xs-12">
+      <p>
+        <span class="label label-default">Quantity:<%= detail.quantity %></span>
+        <span class="label label-default">Selling Price:<%= detail.selling_price %></span>
+        <span class="label label-danger">Total: <%= detail.total_amount.to_s(:delimited) %></span>
+      </p>
+    </div>
+    <div class="col-xs-12">
+      <p>
+        <span class="label label-default">OrderStatus:<%= detail.order_status %></span>
+      </p>
+    </div>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_order_detail_path(detail), :class => 'btn btn-info btn-xs right-bttom' %>
+  </div>
+<% end %>
