@@ -11,11 +11,11 @@
   <% @goods.each do |good| %>
     <!-- <li class="list-group-item"> -->
     <div class="col-xs-12 list-group-item" style="padding:5px;">
-      <span class="label label-danger"><%= good.price_jpy %>円</span>
+      <span class="label label-danger"><%= number_to_currency(good.price_jpy)%></span>
       <span class="label label-primary"><%= good.profit_rate %>%</span>
       <span class="badge"><%= good.created_at.strftime("%Y/%m/%d") %></span>
 
-      <div class="col-xs-4" style="padding: 5px;"> <%= image_tag good.image_path%> </div>
+      <div class="col-xs-4" style="padding: 5px;"> <%= link_to image_tag(good.image_path), good_path(good)%> </div>
       <div class="col-xs-8">
         <p class="list-group-item-heading bg-success"><%= good.name_jp %></p>
         <p class="list-group-item-heading bg-warning"><u><%= good.name_cn %></u></p>

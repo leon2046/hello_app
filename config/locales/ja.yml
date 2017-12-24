@@ -31,6 +31,13 @@
 
 ja:
   hello: "こんにちは"
+  number:
+    currency:
+      format:
+        unit: "JPY"
+        format: "%n %u"
+        negative_format: "-%n%u"
+        precision: 0
   activerecord:
     attributes:
       good:

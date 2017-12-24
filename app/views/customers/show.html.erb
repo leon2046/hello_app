@@ -23,35 +23,28 @@
               :class => 'btn btn-danger' %>
 
 <h2>All Orders</h2>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:order_id) %></th>
-      <th><%= model_class.human_attribute_name(:note) %></th>
-      <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @customer.orders.each do |order| %>
-      <tr>
-        <td><%= link_to order.id, order_path(order) %></td>
-        <td><%= order.note %></td>
-        <td><%= order.status %></td>
-        <td><%= order.created_at.strftime("%m/%d/%Y") %></td>
-        <td>
-          <%= link_to t('.show', :default => t("helpers.links.show")),
-                      order_path(order), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_order_path(order), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      order_path(order),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<% @customer.orders.each do |order| %>
+  <div class="col-xs-12 list-group-item" style="padding:5px;">
+    <span class="badge"><%= order.created_at.strftime("%Y/%m/%d") %></span>
+    <div class="col-xs-8">
+      <span class="label label-info">Order Id:</span>
+      <h3 class="list-group-item-heading">
+        <%= link_to "#{@customer.id}-#{order.id}-#{order.created_at.strftime("%Y%m%d")}", order_path(order) %>
+      <h3>
+      <p class="list-group-item-heading bg-warning"><span class="label label-default">Status:</span><%= order.status %></p>
+      <p class="list-group-item-heading bg-warning"><span class="label label-warning">Note:</span>
+        <span class="label label-danger"><%= order.note %></span>
+      </p>
+    </div>
+    <div class="col-xs-4">
+      <span class="label label-danger">Total:</span>
+      <h3 class="list-group-item-heading">
+        <%= order.order_details.sum(:total_amount).to_s(:delimited) %>
+      </h3>
+    </div>
+
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_order_path(order), :class => 'btn btn-info btn-xs right-bttom' %>
+  </div>
+<% end %>

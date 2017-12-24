@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20171221113447) do
     t.integer "quantity"
     t.integer "purchase_price"
     t.integer "selling_price"
+    t.integer "total_amount"
     t.string "order_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

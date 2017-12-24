@@ -10,7 +10,7 @@ body {
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 11px;
-  line-height: 1.1em;
+  line-height: 1.5em;
 }
 
 pre {
@@ -81,4 +81,10 @@ div {
 
 label {
   display: block;
+}
+
+.right-bttom {
+  position: absolute;
+  bottom:10px;
+  right:10px;
 }

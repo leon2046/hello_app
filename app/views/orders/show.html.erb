@@ -39,7 +39,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @order.order_detail.each do |order_detail| %>
+      <% @order.order_details.each do |order_detail| %>
         <tr>
           <td><%= link_to order_detail.id, order_detail_path(order_detail) %></td>
           <td><%= order_detail.good.name_jp %></td>
