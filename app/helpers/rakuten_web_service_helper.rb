@@ -27,7 +27,7 @@ module RakutenWebServiceHelper
       resultList.push({
         'itemName' => map['Item']['itemName'],
         'itemPrice' => map['Item']['itemPrice'],
-        'imageUrl' => map['Item']['mediumImageUrls'].first['imageUrl']
+        'imageUrl' => map['Item']['smallImageUrls'].first['imageUrl']
         })
     end
     return resultList
