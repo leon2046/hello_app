@@ -16,8 +16,12 @@
   <dd><%= @order_detail.purchase_price %></dd>
   <dt><strong><%= model_class.human_attribute_name(:selling_price) %>:</strong></dt>
   <dd><%= @order_detail.selling_price %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:total_amount) %>:</strong></dt>
+  <dd><%= @order_detail.total_amount %></dd>
   <dt><strong><%= model_class.human_attribute_name(:order_status) %>:</strong></dt>
   <dd><%= @order_detail.order_status %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:order_note) %>:</strong></dt>
+  <dd><%= @order_detail.order_note %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

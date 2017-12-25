@@ -32,9 +32,9 @@
       <h3 class="list-group-item-heading">
         <%= link_to "#{@customer.id}-#{order.id}-#{order.created_at.strftime("%Y%m%d")}", order_path(order) %>
       <h3>
-      <p class="list-group-item-heading bg-warning"><span class="label label-default">Status:</span><%= order.status %></p>
+      <p class="list-group-item-heading bg-warning"><span class="label label-danger">Status:</span><%= order.status %></p>
       <p class="list-group-item-heading bg-warning"><span class="label label-warning">Note:</span>
-        <span class="label label-danger"><%= order.note %></span>
+        <%= order.note %>
       </p>
     </div>
     <div class="col-xs-4">

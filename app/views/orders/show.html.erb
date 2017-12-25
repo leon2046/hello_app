@@ -28,19 +28,18 @@
 
 <hr/>
 
-<% @order.order_details.each do |detail| %>
+<% @order.order_details.list_order_details.each do |detail| %>
   <div class="col-xs-12 list-group-item" style="padding:5px;">
     <span class="badge"><%= detail.created_at.strftime("%Y/%m/%d") %></span>
     <div class="col-xs-12">
       <p>
-        <span class="label label-info">Order Id: <%= link_to detail.order.id, order_path(detail.order) %></span>
+        <span class="label label-info">Order Id: <%= link_to detail.order_id, order_path(detail.order_id) %></span>
         <span class="label label-info">Detail Id: <%= link_to detail.id, order_detail_path(detail) %></span>
       </p>
     </div>
     <div class="col-xs-12">
-      <% good = detail.good %>
-      <p><%= good.name_jp %></p>
-      <p><%= good.name_cn %></p>
+      <p><%= detail.attributes["name_jp"] %></p>
+      <p><%= detail.attributes["name_cn"] %></p>
     </div>
     <div class="col-xs-12">
       <p>
@@ -52,6 +51,7 @@
     <div class="col-xs-12">
       <p>
         <span class="label label-default">OrderStatus:<%= detail.order_status %></span>
+        <span class="label label-danger">OrderNote:<%= detail.order_note %></span>
       </p>
     </div>
     <%= link_to t('.edit', :default => t("helpers.links.edit")),

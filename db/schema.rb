@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20171221113447) do
     t.integer "selling_price"
     t.integer "total_amount"
     t.string "order_status"
+    t.string "order_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["good_id"], name: "index_order_details_on_good_id"

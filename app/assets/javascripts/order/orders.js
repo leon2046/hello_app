@@ -11,6 +11,7 @@ $(document).ready(function() {
         // $ul.empty().append($('<li>').text("No Matched Goods."));
         return;
       }
+
       $menu.addClass("open");
       $ul.find("li").remove();
       data.forEach(function(rec) {

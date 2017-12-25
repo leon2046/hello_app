@@ -9,6 +9,7 @@ class CreateOrderDetails < ActiveRecord::Migration[5.1]
       t.integer :selling_price
       t.integer :total_amount
       t.string :order_status
+      t.string :order_note
 
       t.timestamps
     end
