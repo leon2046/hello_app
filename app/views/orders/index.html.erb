@@ -18,7 +18,8 @@
         <span class="label label-default"><%= order.status %></span>
       </p>
       <p>
-        <span class="label label-danger">Total: <%= order.order_details.sum(:total_amount).to_s(:delimited) %></span>
+        <span class="label label-danger">Total: <%= order.orderDetails.sum(:total_amount).to_s(:delimited) %></span>
+        <span class="label label-danger">Payment: <%= order.payments.sum(:amounts).to_s(:delimited) %></span>
       </p>
       <p class="list-group-item-heading bg-warning"><span class="label label-warning">Note:</span>
         <span><%= order.note %></span>

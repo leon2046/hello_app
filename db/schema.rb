@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(version: 20171221113447) do
     t.integer "order_id"
     t.integer "customer_id"
     t.integer "amounts"
-    t.date "payment_date"
     t.string "payment_method"
     t.string "note"
     t.datetime "created_at", null: false

@@ -4,7 +4,6 @@ one:
   order_id: 1
   customer_id: 1
   amounts: 1
-  payment_date: 2017-12-15
   payment_method: MyString
   note: MyString
 
@@ -12,6 +11,5 @@ two:
   order_id: 1
   customer_id: 1
   amounts: 1
-  payment_date: 2017-12-15
   payment_method: MyString
   note: MyString

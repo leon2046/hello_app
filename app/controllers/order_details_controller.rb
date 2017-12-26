@@ -3,7 +3,7 @@ class OrderDetailsController < ApplicationController
   # GET /order_details
   # GET /order_details.json
   def index
-    @order_details = OrderDetail.list_order_details
+    @order_details = OrderDetail.order_details
   end
 
   # GET /order_details/1
@@ -69,7 +69,8 @@ class OrderDetailsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_detail_params
       p_order = params.require(:order_detail).permit(:order_id, :good_id, :order_time, :quantity, :purchase_price, :selling_price, :order_status, :total_amount, :order_note)
-      if p_order[:total_amount].nil?
+
+      if p_order[:total_amount].strip.blank?
         p_order[:total_amount] = p_order[:selling_price].to_i * p_order[:quantity].to_i
       end
       return p_order

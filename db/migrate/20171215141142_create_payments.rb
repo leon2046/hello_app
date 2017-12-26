@@ -4,7 +4,6 @@ class CreatePayments < ActiveRecord::Migration[5.1]
       t.belongs_to :order, index: true
       t.belongs_to :customer, index: true
       t.integer :amounts
-      t.date :payment_date
       t.string :payment_method
       t.string :note
 

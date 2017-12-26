@@ -28,7 +28,7 @@
 
 <hr/>
 
-<% @order.order_details.list_order_details.each do |detail| %>
+<% @order.orderDetails.order_details.each do |detail| %>
   <div class="col-xs-12 list-group-item" style="padding:5px;">
     <span class="badge"><%= detail.created_at.strftime("%Y/%m/%d") %></span>
     <div class="col-xs-12">
