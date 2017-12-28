@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    attributes:
+      customer:
+          name: "顧客名"
+          snsid: "SNS ID(WeChat/QQ etc.)"
+          note: "備考"
+    models:
+      customer:
+        one: "顧客"
+        other: "顧客"

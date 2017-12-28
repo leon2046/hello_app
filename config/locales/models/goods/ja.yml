@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    attributes:
+      good:
+          jan_cd: "商品コード"
+          name_jp: "商品名（日本語）"
+          name_cn: "商品名（中国語）"
+          price_jpy: "原価（日本円）"
+          profit_rate: "利益率％"
+          image_path: "画像"
+    models:
+      good:
+        one: "商品"
+        other: "商品"

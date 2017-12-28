@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    attributes:
+      order:
+          customer_id: "顧客"
+          note: "備考"
+          status: "状態"
+    models:
+      order:
+        one: "注文"
+        other: "注文"

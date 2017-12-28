@@ -1,11 +1,11 @@
 <%- model_class = Order -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h2><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h2>
 </div>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_order_path,
             :class => 'btn btn-primary' %>
-
+<hr/>
 <% @orders.each do |order| %>
   <div class="col-xs-12 list-group-item" style="padding:5px;">
     <span class="badge"><%= order.created_at.strftime("%Y/%m/%d") %></span>

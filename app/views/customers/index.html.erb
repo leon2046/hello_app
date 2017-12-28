@@ -1,12 +1,14 @@
 <%- model_class = Customer -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h2><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h2>
 
-  <%= link_to t('.new', :default => t("helpers.links.new")),
-              new_customer_path,
-              :class => 'btn btn-primary' %>
 
 </div>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+new_customer_path,
+:class => 'btn btn-primary' %>
+<hr/>
   <% @customers.each do |customer| %>
     <div class="col-xs-12 list-group-item" style="padding:5px;">
       <span class="badge"><%= customer.created_at.strftime("%Y/%m/%d") %></span>

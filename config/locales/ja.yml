@@ -38,27 +38,15 @@ ja:
         format: "%n %u"
         negative_format: "-%n%u"
         precision: 0
-  activerecord:
-    attributes:
-      good:
-          jan_cd: "商品コード"
-          name_jp: "商品名（日本語）"
-          name_cn: "商品名（中国語）"
-          price_jpy: "原価（日本円）"
-          profit_rate: "利益率％"
-          image_path: "画像"
   goods:
     index:
-      jan_cd: "商品コード"
-      name_jp: "商品名（日本語）"
-      name_cn: "商品名（中国語）"
-      price_jpy: "原価（日本円）"
-      profit_rate: "利益率％"
-      image_path: "画像"
-    show:
-      jan_cd: "商品コード"
-      name_jp: "商品名（日本語）"
-      name_cn: "商品名（中国語）"
-      price_jpy: "原価（日本円）"
-      profit_rate: "利益率％"
-      image_path: "画像"
+      title: "商品"
+  customers:
+    index:
+      title: "顧客"
+  orders:
+    index:
+      title: "注文"
+  order_details:
+    index:
+      title: "注文詳細"

@@ -8,17 +8,24 @@ ja:
     pages:
       pages: "Pages"
   helpers:
+    submit:
+      update: "更新"
+      create: "作成"
     actions: "Actions"
     links:
       back: "Back"
       cancel: "Cancel"
       confirm: "Are you sure?"
       destroy: "Delete"
-      new: "New"
-      edit: "Edit"
-      addOrder: "Add Order"
+      new: "新規"
+      edit: "修正"
+      addOrder: "注文追加"
+      cancel: "取り消し"
+      back: "戻る"
+      destroy: "削除"
     titles:
-      edit: "Edit %{model}"
-      save: "Save %{model}"
-      new: "New %{model}"
-      delete: "Delete %{model}"
+      edit: "修正 %{model}"
+      save: "保存 %{model}"
+      new: "新規 %{model}"
+      delete: "削除 %{model}"
+      cancel: "取り消し"
