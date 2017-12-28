@@ -9,3 +9,13 @@ ja:
       order:
         one: "注文"
         other: "注文"
+    enums:
+      order:
+        status:
+          new_order: "新規注文"
+          processing: "処理中"
+          packaged: "梱包済"
+          part_dispatch: "部分発送"
+          all_dispatch: "全部発送"
+          finished: "完了"
+          cancelled: "取消し"

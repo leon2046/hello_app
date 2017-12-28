@@ -79,7 +79,7 @@
   <div class="form-group">
     <%= f.label :order_status, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :order_status, :class => 'form-control' %>
+      <%= f.select :order_status, OrderDetail.order_statuses.keys.to_a.map { |s| [t("activerecord.enums.order_detail.order_status.#{s}"), s]} , {}, {:class => 'form-control'} %>
     </div>
     <%=f.error_span(:order_status) %>
   </div>

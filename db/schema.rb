@@ -39,8 +39,7 @@ ActiveRecord::Schema.define(version: 20171221113447) do
     t.integer "purchase_price"
     t.integer "selling_price"
     t.integer "total_amount"
-    t.string "order_status"
-    t.string "order_status"
+    t.integer "order_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["good_id"], name: "index_order_details_on_good_id"
@@ -50,7 +49,7 @@ ActiveRecord::Schema.define(version: 20171221113447) do
   create_table "orders", force: :cascade do |t|
     t.integer "customer_id"
     t.string "note"
-    t.string "status"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"

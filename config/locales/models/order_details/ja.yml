@@ -15,3 +15,10 @@ ja:
       order_detail:
         one: "注文詳細"
         other: "注文詳細"
+    enums:
+      order_detail:
+        order_status:
+          new_order: "新規注文"
+          stocking: "仕入れ中"
+          stocked: "仕入れ済み"
+          cancelled: "取消し"
