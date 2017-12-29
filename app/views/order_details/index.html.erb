@@ -3,11 +3,35 @@
   <h2><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h2>
 </div>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-new_order_detail_path,
-:class => 'btn btn-primary' %>
+  <div class="col-xs-12 " style="padding:5px;">
+  <%= form_for :search, url: search_orders_path, :html => { :class => "form-horizontal order" } do |f| %>
+  <div class="form-group">
+    <div class="col-lg-12">
+      <div class="input-group">
+        <span class="input-group-addon"><%= (t '.order') %></span>
+        <%= f.collection_select :order_id, Order.all, :id, :note, {:prompt => (t '.prompt')}, {:class => 'form-control'}%>
+      </div>
+    </div>
+    <%=f.error_span(:order_id) %>
+  </div>
 
-<hr/>
+  <div class="form-group">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon"><%= (t '.status') %></span>
+        <%= f.select :order_status, OrderDetail.order_statuses.keys.to_a.map { |s| [t("activerecord.enums.order_detail.order_status.#{s}"), s]} , {:prompt => (t '.prompt')}, {:class => 'form-control'} %>
+      </div>
+    </div>
+    <%=f.error_span(:order_status) %>
+  </div>
+
+  </div>
+  <div class="col-lg-12" style="padding:5px;">
+  <%= link_to t('.new', :default => t("helpers.links.new")), new_order_detail_path, :class => 'btn btn-primary' %>
+  <%= f.submit t('.search'), :class => 'btn btn-primary' %>
+  </div>
+<% end %>
+  <hr/>
 
 <% @order_details.each do |detail| %>
   <div class="col-xs-12 list-group-item" style="padding:5px;">

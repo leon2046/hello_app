@@ -3,7 +3,7 @@ class OrderDetail < ApplicationRecord
   has_one :good, :foreign_key => :id, :primary_key => :good_id
 
   enum order_status: {
-     new_order: 0, stocking: 1, stocked: 3, cancelled: 9
+     new_order: 0, stocking: 1, stocked: 3, cancelled: 99
   }
 
   def self.order_details

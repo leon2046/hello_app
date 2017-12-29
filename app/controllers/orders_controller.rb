@@ -7,6 +7,12 @@ class OrdersController < ApplicationController
     @orders = Order.orders
   end
 
+  # POST /orders/search
+  def search
+    @orders = Order.search(order_search_params)
+    render "index"
+  end
+
   # GET /orders/1
   # GET /orders/1.json
   def show
@@ -70,5 +76,8 @@ class OrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.require(:order).permit(:customer_id, :note, :status)
+    end
+    def order_search_params
+      params.require(:search).permit(:customer_id, :status)
     end
 end

@@ -21,6 +21,17 @@ class GoodsController < ApplicationController
   def edit
   end
 
+  # POST /goods/search
+  def search
+    params = search_params
+    if(params["keyword"].empty?)
+      @goods = Good.all
+    else
+      @goods = Good.goodsNameLike(params["keyword"])
+    end
+    render 'index'
+  end
+
   # GET /goods/query
   def query
     render :json => Good.goodsNameLike(params[:keyword])
@@ -74,5 +85,9 @@ class GoodsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def good_params
       params.require(:good).permit(:jan_cd, :name_jp, :name_cn, :price_jpy, :profit_rate, :image_path)
+    end
+
+    def search_params
+      params.require(:good).permit(:keyword)
     end
 end

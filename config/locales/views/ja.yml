@@ -47,6 +47,14 @@ ja:
   orders:
     index:
       title: "注文"
+      customer: "顧客"
+      status: "状態"
+      search: "注文検索"
+      prompt: "選択してください"
   order_details:
     index:
-      title: "注文詳細"
+      title: "注文明細"
+      order: "注文"
+      status: "状態"
+      search: "注文明細検索"
+      prompt: "選択してください"

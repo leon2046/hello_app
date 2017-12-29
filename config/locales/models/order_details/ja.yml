@@ -13,8 +13,8 @@ ja:
           order_status: "状態"
     models:
       order_detail:
-        one: "注文詳細"
-        other: "注文詳細"
+        one: "注文明細"
+        other: "注文明細"
     enums:
       order_detail:
         order_status:
