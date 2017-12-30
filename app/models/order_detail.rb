@@ -6,7 +6,15 @@ class OrderDetail < ApplicationRecord
      new_order: 0, stocking: 1, stocked: 3, cancelled: 99
   }
 
-  def self.order_details
-    OrderDetail.joins(:good).select("order_details.*, goods.name_cn, goods.name_jp")
+  def self.search(params = {})
+    conditions = nil
+    params.each do |key, val|
+      if conditions.present?
+        conditions = conditions.and(arel_table[key].eq(val)) if !val.empty?
+      else
+        conditions = arel_table[key].eq(val) if !val.empty?
+      end
+    end
+    OrderDetail.joins(:good).select("order_details.*, goods.name_cn, goods.name_jp").where(conditions)
   end
 end

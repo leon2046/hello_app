@@ -23,11 +23,11 @@ class GoodsController < ApplicationController
 
   # POST /goods/search
   def search
-    params = search_params
-    if(params["keyword"].empty?)
+    @params = search_params
+    if(@params["keyword"].empty?)
       @goods = Good.all
     else
-      @goods = Good.goodsNameLike(params["keyword"])
+      @goods = Good.goodsNameLike(@params["keyword"])
     end
     render 'index'
   end
@@ -88,6 +88,6 @@ class GoodsController < ApplicationController
     end
 
     def search_params
-      params.require(:good).permit(:keyword)
+      params.require(:search).permit(:keyword)
     end
 end

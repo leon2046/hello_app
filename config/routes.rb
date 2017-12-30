@@ -23,8 +23,16 @@ Rails.application.routes.draw do
       post :search
     end
   end
-  resources :order_details
-  resources :payments
+  resources :order_details do
+    collection do
+      post  :search
+    end
+  end
+  resources :payments do
+    collection do
+      post  :search
+    end
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'application#hello'
 end

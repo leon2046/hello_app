@@ -3,13 +3,16 @@
   <h2><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h2>
 </div>
 
+<%= form_for :search, url: search_orders_path, :html => { :class => "form-horizontal order" } do |f| %>
   <div class="col-xs-12 " style="padding:5px;">
-  <%= form_for :search, url: search_orders_path, :html => { :class => "form-horizontal order" } do |f| %>
   <div class="form-group">
-    <div class="col-lg-12">
+    <div class="col-xs-12">
       <div class="input-group">
         <span class="input-group-addon"><%= (t '.customer') %></span>
-        <%= f.collection_select :customer_id, Customer.all, :id, :name, {:prompt => (t '.prompt')}, {:class => 'form-control'}%>
+        <%= f.collection_select :customer_id, Customer.all, :id, :name, {:selected =>@params && @params["customer_id"], :include_blank => (t '.prompt')}, {:class => 'form-control'}%>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-remove-circle"></span>
+        </span>
       </div>
     </div>
     <%=f.error_span(:customer_id) %>
@@ -19,14 +22,17 @@
     <div class="col-xs-12">
       <div class="input-group">
         <span class="input-group-addon"><%= (t '.status') %></span>
-        <%= f.select :status, Order.statuses.keys.to_a.map { |s| [t("activerecord.enums.order.status.#{s}"), s]} , { :prompt => (t '.prompt')}, {:class => 'form-control'} %>
+        <%= f.select :status, Order.statuses.keys.to_a.map { |s| [t("activerecord.enums.order.status.#{s}"), s]} , {:selected =>@params && @params["status"], :include_blank => (t '.prompt')}, {:class => 'form-control'} %>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-remove-circle"></span>
+        </span>
       </div>
     </div>
     <%=f.error_span(:status) %>
   </div>
 
   </div>
-  <div class="col-lg-12" style="padding:5px;">
+  <div class="col-xs-12" style="padding:5px;">
   <%= link_to t('.new', :default => t("helpers.links.new")),new_order_path, :class => 'btn btn-primary' %>
   <%= f.submit t('.search'), :class => 'btn btn-primary' %>
   </div>
@@ -59,7 +65,12 @@
           Customer: <%= link_to order.attributes["customer_name"], customer_path(order.customer_id) %>
         </span>
       </div>
-      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                  edit_order_path(order), :class => 'btn btn-info btn-xs right-bttom' %>
+      <div class="col-xs-4" style="margin-bottom:10px">
+        <%= link_to t('.payment', :default => t("helpers.links.payment")), new_payment_path(:customer_id => order.customer_id, :order_id => order.id), :class => 'btn btn-info btn-xs btn-danger pull-right' %>
+      </div>
+      <div class="col-xs-4">
+        <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_order_path(order), :class => 'btn btn-info btn-xs pull-right' %>
+      </div>
     </div>
 <% end %>
+<%= javascript_include_tag "common/remomve_button_for_select" %>

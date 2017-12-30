@@ -7,6 +7,13 @@ class PaymentsController < ApplicationController
     @payments = Payment.payments
   end
 
+  # POST /orders/search
+  def search
+    @params = payment_search_params
+    @payments = Payment.search(@params)
+    render "index"
+  end
+
   # GET /payments/1
   # GET /payments/1.json
   def show
@@ -14,7 +21,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments/new
   def new
-    @payment = Payment.new
+    @payment = Payment.new(new_params)
   end
 
   # GET /payments/1/edit
@@ -29,7 +36,7 @@ class PaymentsController < ApplicationController
   # POST /payments.json
   def create
     @payment = Payment.new(payment_params)
-
+    @payment.customer_id = @Order.find(@payment.order_id).customer_id;
     respond_to do |format|
       if @payment.save
         format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
@@ -74,5 +81,13 @@ class PaymentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params
       params.require(:payment).permit(:order_id, :customer_id, :amounts, :payment_method, :note)
+    end
+
+    def payment_search_params
+      params.require(:search).permit(:order_id, :customer_id)
+    end
+
+    def new_params
+      params.permit(:order_id, :customer_id)
     end
 end

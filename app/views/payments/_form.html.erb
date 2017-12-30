@@ -18,14 +18,14 @@
   <div class="form-group">
     <%= f.label :order_id, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.collection_select :order_id, Order.all, :id, :note, {:selected => :order_id}, {:class => 'form-control'}%>
+      <%= f.collection_select :order_id, Order.all, :id, :note, {:selected => @payment.order_id}, {:class => 'form-control'}%>
     </div>
     <%=f.error_span(:order_id) %>
   </div>
   <div class="form-group">
     <%= f.label :customer_id, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.collection_select :customer_id, Customer.all, :id, :name, {:selected => :customer_id}, {:class => 'form-control'}%>
+      <%= f.collection_select :customer_id, Customer.all, :id, :name, {:selected => @payment.customer_id}, {:class => 'form-control'}%>
     </div>
     <%=f.error_span(:customer_id) %>
   </div>

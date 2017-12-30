@@ -41,6 +41,9 @@ ja:
   goods:
     index:
       title: "商品"
+      search: "商品検索"
+      good: "商品"
+      good-placeholder: "商品名を入力してください"
   customers:
     index:
       title: "顧客"
@@ -48,13 +51,21 @@ ja:
     index:
       title: "注文"
       customer: "顧客"
+      payment: "支払い"
       status: "状態"
       search: "注文検索"
-      prompt: "選択してください"
+      prompt: "全て"
   order_details:
     index:
       title: "注文明細"
       order: "注文"
       status: "状態"
       search: "注文明細検索"
-      prompt: "選択してください"
+      prompt: "全て"
+  payments:
+    index:
+      title: "支払い情報"
+      order: "注文"
+      customer: "顧客"
+      search: "支払い情報検索"
+      prompt: "全て"

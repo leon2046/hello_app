@@ -3,7 +3,14 @@ class OrderDetailsController < ApplicationController
   # GET /order_details
   # GET /order_details.json
   def index
-    @order_details = OrderDetail.order_details
+    @order_details = OrderDetail.search
+  end
+
+  # POST /order_details/search
+  def search
+    @params = order_details_search_params
+    @order_details = OrderDetail.search(@params)
+    render "index"
   end
 
   # GET /order_details/1
@@ -74,5 +81,9 @@ class OrderDetailsController < ApplicationController
         p_order[:total_amount] = p_order[:selling_price].to_i * p_order[:quantity].to_i
       end
       return p_order
+    end
+
+    def order_details_search_params
+      params.require(:search).permit(:order_id, :order_status)
     end
 end

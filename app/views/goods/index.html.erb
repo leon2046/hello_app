@@ -2,29 +2,28 @@
 <div class="page-header">
   <h2><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h2>
 </div>
-<%= link_to t('.new', :default => t("helpers.links.new")),new_good_path, :class => 'btn btn-primary' %>
+<%= form_for :search, url: search_goods_path, :html => { :class => "form-horizontal good" }  do |f| %>
+  <div class="col-xs-12 " style="padding:5px;">
+    <div class="form-group">
+      <div class="col-lg-12">
+        <div class="input-group">
+          <span class="input-group-addon"><%= (t '.good') %></span>
+          <%= f.text_field :keyword, :class => 'form-control', :value => @params && @params["keyword"], :placeholder=> (t '.good-placeholder')%>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-remove-circle"></span>
+          </span>
+        </div>
+      </div>
+      <%=f.error_span(:order_id) %>
+    </div>
+  </div>
+  <div class="col-xs-12" style="padding:5px;">
+  <%= link_to t('.new', :default => t("helpers.links.new")),new_good_path, :class => 'btn btn-primary' %>
+  <%= f.submit t('.search'), :class => 'btn btn-primary' %>
+  </div>
+<% end %>
 <hr/>
-
-<div class="list-group col-xs-12">
-    <%= form_for :good, url: search_goods_path, :html => { :class => "form-horizontal" }  do |f| %>
-      <div class="form-group form-group-xs">
-        <div class="col-xs-12">
-          <div class="input-group">
-            <span class="input-group-addon"><%= (t '.title') %></span>
-            <%= f.text_field :keyword, :class => 'form-control' %>
-            <span class="input-group-btn">
-              <button id="name_jp_rakuten_query" class="btn btn-default" type="submit">
-                <span class="glyphicon glyphicon-search"></span>
-              </button>
-            </span>
-          </div><!-- /input-group -->
-        </div><!-- /.col-xs-12 -->
-      </div><!-- /.row -->
-    <% end %>
-</div>
-
   <% @goods.each do |good| %>
-    <!-- <li class="list-group-item"> -->
     <div class="col-xs-12 list-group-item" style="padding:5px;">
       <span class="label label-danger"><%= number_to_currency(good.price_jpy)%></span>
       <span class="label label-primary"><%= good.profit_rate %>%</span>
@@ -39,6 +38,6 @@
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
                   edit_good_path(good), :class => 'btn btn-info btn-xs pull-right' %>
     </div>
-    <!-- </li> -->
   <% end %>
 </div>
+<%= javascript_include_tag "goods/goods" %>

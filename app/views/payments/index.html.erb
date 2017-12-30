@@ -2,10 +2,43 @@
 <div class="page-header">
   <h2><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h2>
 </div>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_payment_path,
-            :class => 'btn btn-primary' %>
-<hr/>            
+
+
+<%= form_for :search, url: search_payments_path, :html => { :class => "form-horizontal order" } do |f| %>
+  <div class="col-xs-12 " style="padding:5px;">
+  <div class="form-group">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon"><%= (t '.order') %></span>
+        <%= f.collection_select :order_id, Order.all, :id, :note, {:selected =>@params && @params["order_id"], :include_blank => (t '.prompt')}, {:class => 'form-control'}%>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-remove-circle"></span>
+        </span>
+      </div>
+    </div>
+    <%=f.error_span(:order_id) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon"><%= (t '.customer') %></span>
+        <%= f.collection_select :customer_id, Customer.all, :id, :name, {:selected =>@params && @params["customer_id"], :include_blank => (t '.prompt')}, {:class => 'form-control'}%>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-remove-circle"></span>
+        </span>
+      </div>
+    </div>
+    <%=f.error_span(:customer_id) %>
+  </div>
+
+  </div>
+  <div class="col-xs-12" style="padding:5px;">
+  <%= link_to t('.new', :default => t("helpers.links.new")), new_payment_path, :class => 'btn btn-primary' %>
+  <%= f.submit t('.search'), :class => 'btn btn-primary' %>
+  </div>
+<% end %>
+  <hr/>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -15,7 +48,6 @@
       <th><%= model_class.human_attribute_name(:amounts) %></th>
       <th><%= model_class.human_attribute_name(:payment_method) %></th>
       <th><%= model_class.human_attribute_name(:note) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -23,12 +55,11 @@
     <% @payments.each do |payment| %>
       <tr>
         <td><%= link_to payment.id, payment_path(payment) %></td>
-        <td><%= link_to payment.order_id, order_path(payment.order_id) %></td>
+        <td><%= link_to payment.attributes["order_node"], order_path(payment.order_id) %></td>
         <td><%= link_to payment.attributes["customer_name"], customer_path(payment.customer_id) %></td>
         <td><%= payment.amounts %></td>
         <td><%= payment.payment_method %></td>
         <td><%= payment.note %></td>
-        <td><%= payment.created_at.strftime("%Y/%m/%d") %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       payment_path(payment), :class => 'btn btn-default btn-xs' %>
@@ -44,3 +75,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%= javascript_include_tag "common/remomve_button_for_select" %>

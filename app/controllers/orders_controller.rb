@@ -4,12 +4,13 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.orders
+    @orders = Order.search
   end
 
   # POST /orders/search
   def search
-    @orders = Order.search(order_search_params)
+    @params = order_search_params
+    @orders = Order.search(@params)
     render "index"
   end
 
@@ -77,6 +78,7 @@ class OrdersController < ApplicationController
     def order_params
       params.require(:order).permit(:customer_id, :note, :status)
     end
+
     def order_search_params
       params.require(:search).permit(:customer_id, :status)
     end

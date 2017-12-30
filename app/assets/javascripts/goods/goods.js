@@ -33,5 +33,10 @@ $(document).ready(function() {
     });
 
     return false;
-  })
+  });
+
+  $(".glyphicon-remove-circle").parent("span").on("click", function(evt) {
+    $("#search_keyword").focus().val("");
+    return false;
+  });
 })
