@@ -50,7 +50,7 @@
         <% end %>
         <p>
           <span class="list-group-item-heading bg-warning"><%= t ".status"%>:</span>
-          <span class="label label-default"><%= order.status %></span>
+          <span class="label label-default"><%= t("activerecord.enums.order.status.#{order.status}") %></span>
         </p>
         <p>
           <span class="label label-danger"><%= t ".total_amount"%>: <%= number_to_currency(order.orderDetails.sum(:total_amount), :unit=>"CNY")%></span>

@@ -27,34 +27,4 @@
             new_order_detail_path(:order_id => @order.id), :class => 'btn btn-default' %>
 
 <hr/>
-
-<% @order.orderDetails.search.each do |detail| %>
-  <div class="col-xs-12 list-group-item" style="padding:5px;">
-    <span class="badge"><%= detail.created_at.strftime("%Y/%m/%d") %></span>
-    <div class="col-xs-12">
-      <p>
-        <span class="label label-info">Order Id: <%= link_to detail.order_id, order_path(detail.order_id) %></span>
-        <span class="label label-info">Detail Id: <%= link_to detail.id, order_detail_path(detail) %></span>
-      </p>
-    </div>
-    <div class="col-xs-12">
-      <p><%= detail.attributes["name_jp"] %></p>
-      <p><%= detail.attributes["name_cn"] %></p>
-    </div>
-    <div class="col-xs-12">
-      <p>
-        <span class="label label-default">Quantity:<%= detail.quantity %></span>
-        <span class="label label-default">Selling Price:<%= detail.selling_price %></span>
-        <span class="label label-danger">Total: <%= detail.total_amount.to_s(:delimited) %></span>
-      </p>
-    </div>
-    <div class="col-xs-12">
-      <p>
-        <span class="label label-default">OrderStatus:<%= detail.order_status %></span>
-        <span class="label label-danger">OrderNote:<%= detail.order_note %></span>
-      </p>
-    </div>
-    <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                edit_order_detail_path(detail), :class => 'btn btn-info btn-xs right-bttom' %>
-  </div>
-<% end %>
+<%= render :partial => 'order_details/list', locals: {order_details: @order.orderDetails.search}%>

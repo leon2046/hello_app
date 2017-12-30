@@ -1,0 +1,35 @@
+
+<% order_details.each do |detail| %>
+<div class="col-xs-12 list-group-item" style="padding:5px;">
+  <div class="col-xs-12" style="margin-bottom:5px;">
+    <%= link_to order_path(detail.order_id) do%>
+      <span class="label label-info"><%= t 'order_details.index.order'%>:<%= detail.order_id %></span>
+    <% end %>
+    <%= link_to order_detail_path(detail) do %>
+      <span class="label label-info"><%= t 'order_details.index.order_detail'%>:<%= detail.id %></span>
+    <% end %>
+    <span class="label label-info"><%= detail.created_at.strftime("%Y/%m/%d") %></span>
+  </div>
+  <div class="col-xs-12">
+    <p><%= detail.attributes["name_jp"] %></p>
+    <p><%= detail.attributes["name_cn"] %></p>
+  </div>
+  <div class="col-xs-12">
+    <p>
+      <span class="label label-default"><%= t 'order_details.index.quantity'%>:<%= detail.quantity %></span>
+      <span class="label label-default"><%= t 'order_details.index.selling_price'%>:<%= number_to_currency(detail.selling_price, :unit => "CNY") %></span>
+      <span class="label label-danger"><%= t 'order_details.index.total_amount'%>:<%= number_to_currency(detail.total_amount, :unit => "CNY") %></span>
+    </p>
+  </div>
+  <div class="col-xs-12">
+    <p>
+      <span class="label label-default"><%= t 'order_details.index.status'%>:<%= t("activerecord.enums.order_detail.order_status.#{detail.order_status}") %></span>
+      <span class="label label-info"><%= t 'order_details.index.note'%>:<%= detail.order_note %></span>
+    </p>
+  </div>
+  <div class="col-xs-12">
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_order_detail_path(detail), :class => 'btn btn-info btn-xs pull-right' %>
+  </div>
+</div>
+<% end %>
