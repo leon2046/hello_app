@@ -24,35 +24,4 @@
 
 <h2>All Orders</h2>
 
-<% @customer.orders.each do |order| %>
-  <div class="col-xs-12 list-group-item" style="padding:5px;">
-    <div class="col-xs-8">
-      <span class="label label-info">Order Id:</span>
-      <h3 class="list-group-item-heading">
-        <%= link_to "#{@customer.id}-#{order.id}-#{order.created_at.strftime("%Y%m%d")}", order_path(order) %>
-      <h3>
-      <p class="list-group-item-heading bg-warning"><span class="label label-danger">Status:</span><%= order.status %></p>
-      <p class="list-group-item-heading bg-warning"><span class="label label-warning">Note:</span>
-        <%= order.note %>
-      </p>
-    </div>
-    <div class="col-xs-4">
-      <span class="label label-danger">Total:</span>
-      <h3 class="list-group-item-heading">
-        <%= order.orderDetails.sum(:total_amount).to_s(:delimited) %>
-      </h3>
-      <span class="label label-danger">Payments:</span>
-      <h3 class="list-group-item-heading">
-        <%= order.payments.sum(:amounts).to_s(:delimited) %>
-      </h3>
-    </div>
-
-    <div class="col-xs-12">
-      <span>
-      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-      edit_order_path(order), :class => 'btn btn-info btn-xs pull-right' %>
-    </span>
-    </div>
-
-  </div>
-<% end %>
+<%= render :partial => 'orders/list', locals: {orders: @customer.orders}%>

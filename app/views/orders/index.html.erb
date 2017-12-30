@@ -39,38 +39,5 @@
 <% end %>
   <hr/>
 
-<% @orders.each do |order| %>
-    <div class="col-xs-12 list-group-item" style="padding:5px;">
-      <span class="badge"><%= order.created_at.strftime("%Y/%m/%d") %></span>
-      <div class="col-xs-12">
-        <%= link_to  order_path(order) do %>
-        <p>
-          <span class="label label-info"><%= t ".order"%>: <%= order.id %></span>
-        </p>
-        <% end %>
-        <p>
-          <span class="list-group-item-heading bg-warning"><%= t ".status"%>:</span>
-          <span class="label label-default"><%= t("activerecord.enums.order.status.#{order.status}") %></span>
-        </p>
-        <p>
-          <span class="label label-danger"><%= t ".total_amount"%>: <%= number_to_currency(order.orderDetails.sum(:total_amount), :unit=>"CNY")%></span>
-          <span class="label label-danger"><%= t ".payment"%>:<%= number_to_currency(order.payments.sum(:amounts), :unit=>"CNY")
-            %></span>
-        </p>
-        <p class="list-group-item-heading bg-warning"><span class="label label-warning"><%= t ".note"%>:</span>
-          <span><%= order.note %></span>
-        </p>
-      </div>
-      <div class="col-xs-12">
-        <span class="list-group-item-heading">
-          Customer: <%= link_to order.attributes["customer_name"], customer_path(order.customer_id) %>
-        </span>
-      </div>
-      <div class="col-xs-12">
-        <%= link_to t('.payment', :default => t("helpers.links.payment")), new_payment_path(:customer_id => order.customer_id, :order_id => order.id), :class => 'btn btn-info btn-xs btn-danger pull-right' %>
-        <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_order_path(order), :class => 'btn btn-info btn-xs pull-right' %>
-        <%= link_to t('.addOrder', :default => t("helpers.links.addOrder")), new_order_detail_path(:order_id => order.id), :class => 'btn btn-primary btn-xs pull-right' %>
-      </div>
-    </div>
-<% end %>
+<%= render :partial => 'list', locals: {orders: @orders}%>
 <%= javascript_include_tag "common/remomve_button_for_select" %>
