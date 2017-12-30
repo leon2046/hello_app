@@ -2,6 +2,7 @@ ja:
   activerecord:
     attributes:
       order_detail:
+          order_id: 注文
           customer_id: "顧客"
           good_id: "商品"
           order_time: "注文日"
@@ -21,4 +22,5 @@ ja:
           new_order: "新規注文"
           stocking: "仕入れ中"
           stocked: "仕入れ済み"
+          dispatch: "発送済み"
           cancelled: "取消し"

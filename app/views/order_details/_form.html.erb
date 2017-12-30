@@ -18,6 +18,23 @@
   <%= f.hidden_field :order_id, :class => 'form-control' %>
 
   <div class="form-group">
+    <%= f.label :order_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= select :order_detail, :order_id,
+            options_for_select(Order.all.map{|t| [t.note, t.id,
+                                  {
+                                    :disabled => @order_detail.order_id && t.id != @order_detail.order_id
+                                  }]}),
+                                {:selected => @order_detail.order_id,
+                                  :include_blank => !@order_detail.order_id? && t('.prompt', :default => t("order_details.new.prompt"))},
+                                {:class => 'form-control'}
+                              %>
+    </div>
+    <%=f.error_span(:order_id) %>
+  </div>
+
+
+  <div class="form-group">
     <%= f.label :good_id, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <div id="goodIdDropdownMenu" class="dropdown">

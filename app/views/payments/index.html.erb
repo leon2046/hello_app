@@ -7,7 +7,7 @@
 <%= form_for :search, url: search_payments_path, :html => { :class => "form-horizontal order" } do |f| %>
   <div class="col-xs-12 " style="padding:5px;">
   <div class="form-group">
-    <div class="col-xs-12">
+    <div class='col-xs-12'>
       <div class="input-group">
         <span class="input-group-addon"><%= (t '.order') %></span>
         <%= f.collection_select :order_id, Order.all, :id, :note, {:selected =>@params && @params["order_id"], :include_blank => (t '.prompt')}, {:class => 'form-control'}%>
@@ -20,7 +20,7 @@
   </div>
 
   <div class="form-group">
-    <div class="col-xs-12">
+    <div class='col-xs-12'>
       <div class="input-group">
         <span class="input-group-addon"><%= (t '.customer') %></span>
         <%= f.collection_select :customer_id, Customer.all, :id, :name, {:selected =>@params && @params["customer_id"], :include_blank => (t '.prompt')}, {:class => 'form-control'}%>
@@ -33,47 +33,58 @@
   </div>
 
   </div>
-  <div class="col-xs-12" style="padding:5px;">
+  <div class='col-xs-12' style="padding:5px;">
   <%= link_to t('.new', :default => t("helpers.links.new")), new_payment_path, :class => 'btn btn-primary' %>
   <%= f.submit t('.search'), :class => 'btn btn-primary' %>
   </div>
 <% end %>
-  <hr/>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:order_id) %></th>
-      <th><%= model_class.human_attribute_name(:customer_id) %></th>
-      <th><%= model_class.human_attribute_name(:amounts) %></th>
-      <th><%= model_class.human_attribute_name(:payment_method) %></th>
-      <th><%= model_class.human_attribute_name(:note) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @payments.each do |payment| %>
-      <tr>
-        <td><%= link_to payment.id, payment_path(payment) %></td>
-        <td><%= link_to payment.attributes["order_node"], order_path(payment.order_id) %></td>
-        <td><%= link_to payment.attributes["customer_name"], customer_path(payment.customer_id) %></td>
-        <td><%= payment.amounts %></td>
-        <td><%= payment.payment_method %></td>
-        <td><%= payment.note %></td>
-        <td>
-          <%= link_to t('.show', :default => t("helpers.links.show")),
-                      payment_path(payment), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_payment_path(payment), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      payment_path(payment),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
-      </tr>
+<hr/>
+
+
+<% @payments.each do |payment| %>
+<div class='col-xs-12 list-group-item' style='padding:5px;'>
+  <div class='col-xs-12' style='margin-bottom:5px;'>
+    <%= link_to payment_path(payment) do%>
+      <span class='label label-default'><%= payment.id %>-<%= payment.created_at.strftime("%Y/%m/%d") %></span>
     <% end %>
-  </tbody>
-</table>
+  </div>
+  <div class='col-xs-2'>
+    <span class='label label-default'><%= t '.order' %></span>
+  </div>
+  <div class='col-xs-10' style='margin-bottom:5px;'>
+      <%= link_to payment.attributes["order_node"], order_path(payment.order_id) %>
+  </div>
+  <div class='col-xs-2'>
+    <span class='label label-default'><%= t '.customer' %></span>
+  </div>
+  <div class='col-xs-10' style='margin-bottom:5px;'>
+    <%= link_to payment.attributes["customer_name"], customer_path(payment.customer_id) %>
+  </div>
+
+  <div class='col-xs-2'>
+    <span class='label label-default'><%= t '.payment_method' %></span>
+  </div>
+  <div class="col-xs-4">
+    <span class='pull-right'><%= payment.payment_method %></span>
+  </div>
+  <div class='col-xs-6'>
+    <span class="label label-danger pull-left"><%= number_to_currency(payment.amounts, :unit=>"CNY") %></span>
+  </div>
+
+  <div class='col-xs-12'>
+    <%= payment.note %>
+  </div>
+  <div class='col-xs-12'>
+    <%= link_to t('.edit', :default => t('helpers.links.edit')),
+    edit_payment_path(payment), :class => 'btn btn-default btn-xs  pull-right' %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+    payment_path(payment),
+    :method => :delete,
+    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+    :class => 'btn btn-xs btn-danger  pull-right' %>
+  </div>
+</div>
+<% end %>
+
 
 <%= javascript_include_tag "common/remomve_button_for_select" %>

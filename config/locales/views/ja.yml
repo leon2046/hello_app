@@ -62,9 +62,12 @@ ja:
       status: "状態"
       search: "注文明細検索"
       prompt: "全て"
+    new:
+      prompt: "選択してください"
   payments:
     index:
       title: "支払い情報"
+      payment_method: "支払方法"
       order: "注文"
       customer: "顧客"
       search: "支払い情報検索"
