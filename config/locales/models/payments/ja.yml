@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    attributes:
+      payment:
+        order_id: "注文"
+        customer_id: "顧客"
+        amounts: "金額"
+        payment_method: "支払い方法"
+        note: "備考"
+    models:
+      payment:
+        one: "支払い情報"
+        other: "支払い情報"

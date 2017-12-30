@@ -16,5 +16,6 @@ class OrderDetail < ApplicationRecord
       end
     end
     OrderDetail.joins(:good).select("order_details.*, goods.name_cn, goods.name_jp").where(conditions)
+    .order({order_id: :desc}, {id: :desc})
   end
 end

@@ -15,6 +15,10 @@ class Order < ApplicationRecord
         conditions = arel_table[key].eq(val) if !val.empty?
       end
     end
-    Order.joins(:customer).select("orders.*, customers.name as customer_name").where(conditions)
+    Order.joins(:customer).select("orders.*, customers.name as customer_name").where(conditions).order({id: :desc})
+  end
+
+  def self.select_options
+    Order.all.order(id: :desc)
   end
 end

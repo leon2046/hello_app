@@ -5,9 +5,12 @@
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:order_id) %>:</strong></dt>
-  <dd><%= @order_detail.order_id %></dd>
+  <dd><%= @order_detail.order.note %></dd>
   <dt><strong><%= model_class.human_attribute_name(:good_id) %>:</strong></dt>
-  <dd><%= @order_detail.good_id %></dd>
+  <dd>
+    <label><%= @order_detail.good.name_jp %></label>
+    <label><%= @order_detail.good.name_cn %></label>
+  </dd>
   <dt><strong><%= model_class.human_attribute_name(:order_time) %>:</strong></dt>
   <dd><%= @order_detail.order_time %></dd>
   <dt><strong><%= model_class.human_attribute_name(:quantity) %>:</strong></dt>

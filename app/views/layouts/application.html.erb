@@ -38,28 +38,28 @@
     <![endif]-->
   </head>
   <body>
-
-    <div class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">HelloApp</a>
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav">
-            <li><%= link_to "Goods", :controller => "goods", :action => "index"  %></li>
-            <li><%= link_to "Customers", :controller => "customers", :action => "index" %></li>
-            <li><%= link_to "Orders", :controller => "orders", :action => "index"  %></li>
-            <li><%= link_to "Order Details", :controller => "order_details", :action => "index"  %></li>
-            <li><%= link_to "Payments", :controller => "payments", :action => "index"  %></li>
-          </ul>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Brand</a>
+          <div class="btn-group navbar-header pull-right">
+            <button type="button" class="dropdown navbar-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><%= link_to t("goods.index.title"), :controller => "goods", :action => "index"  %></li>
+              <li><%= link_to t("customers.index.title"), :controller => "customers", :action => "index" %></li>
+              <li><%= link_to t("orders.index.title"), :controller => "orders", :action => "index"  %></li>
+              <li><%= link_to t("order_details.index.title"), :controller => "order_details", :action => "index"  %></li>
+              <li><%= link_to t("payments.index.title"), :controller => "payments", :action => "index"  %></li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </div>
+      </div><!-- /.container-fluid -->
+    </nav>
 
     <div class="container">
       <div class="row">
@@ -71,7 +71,6 @@
 
       <footer>
         <p>&copy; Company 2017</p>
-        <%= link_to "TOP", :controller => "top", :action => "index" %>
       </footer>
 
     </div> <!-- /container -->

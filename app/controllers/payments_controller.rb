@@ -4,7 +4,7 @@ class PaymentsController < ApplicationController
   # GET /payments
   # GET /payments.json
   def index
-    @payments = Payment.payments
+    @payments = Payment.search
   end
 
   # POST /orders/search

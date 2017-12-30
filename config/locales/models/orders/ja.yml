@@ -2,6 +2,7 @@ ja:
   activerecord:
     attributes:
       order:
+          customer: "顧客"
           customer_id: "顧客"
           note: "備考"
           status: "状態"
