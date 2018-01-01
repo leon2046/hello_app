@@ -8,8 +8,8 @@ ja:
           order_time: "注文日"
           quantity: "数量"
           purchase_price: "仕入れ価格"
-          selling_price: "定価"
-          total_amount: "合計金額"
+          selling_price: "定価(CNY)"
+          total_amount: "合計金額(CNY)"
           order_note: "備考"
           order_status: "状態"
     models:

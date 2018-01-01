@@ -5,6 +5,7 @@ class CreateGoods < ActiveRecord::Migration[5.1]
       t.string :name_jp
       t.string :name_cn
       t.integer :price_jpy
+      t.integer :selling_price_cny
       t.integer :profit_rate
       t.string :image_path
 

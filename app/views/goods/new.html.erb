@@ -3,3 +3,7 @@
   <h2><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h2>
 </div>
 <%= render :partial => 'form' %>
+
+<%= javascript_tag do%>
+var current_rate = <%= Rate.current_rate.first.rate %>
+<% end %>

@@ -6,6 +6,7 @@ one:
   name_cn: MyString
   price_jpy: 1
   profit_rate: 1
+  selling_price_cny: 1
   image_path: MyString
 
 two:
@@ -14,4 +15,5 @@ two:
   name_cn: MyString
   price_jpy: 1
   profit_rate: 1
+  selling_price_cny: 1
   image_path: MyString

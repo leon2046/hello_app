@@ -14,6 +14,8 @@
   <dd><%= @good.price_jpy %></dd>
   <dt><strong><%= model_class.human_attribute_name(:profit_rate) %>:</strong></dt>
   <dd><%= @good.profit_rate %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:selling_price_cny) %>:</strong></dt>
+  <dd><%= @good.selling_price_cny %></dd>
   <dt><strong><%= model_class.human_attribute_name(:image_path) %>:</strong></dt>
   <dd><%= image_tag(@good.image_path) %></dd>
 </dl>

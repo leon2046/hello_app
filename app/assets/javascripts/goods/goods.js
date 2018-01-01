@@ -18,16 +18,19 @@ $(document).ready(function() {
 
       $table.empty();
       data.forEach(function(rec) {
-        $('<tr>').append(
-            $('<th scope="row"></th>').text('¥' + rec.itemPrice)).append($('<td>')
-            .text(rec.itemName)).appendTo($table).data('rowData', rec)
-          .on('click', function() {
-            var rowData = $(this).data('rowData');
-            $('#good_name_jp').val(rowData.itemName);
-            $('#good_price_jpy').val(rowData.itemPrice);
-            $('#good_image_path').val(rowData.imageUrl);
-            $modal.modal('hide');
-          });
+        $('<tr>').append($('<th scope="row"></th>').text('JPY ' + rec.itemPrice))
+                .append($('<td>').text(rec.itemName))
+                .appendTo($table).data('rowData', rec)
+                .on('click', function() {
+                    var rowData = $(this).data('rowData');
+                    $('#good_name_jp').val(rowData.itemName);
+                    $('#good_price_jpy').val(rowData.itemPrice);
+                    var profit_rate = 1 + (parseInt($('#good_profit_rate').val()) / 100 || 0.1);
+                    var selling_price_cny = Math.floor(rowData.itemPrice * current_rate * profit_rate);
+                    $('#good_selling_price_cny').val(selling_price_cny);
+                    $('#good_image_path').val(rowData.imageUrl);
+                    $modal.modal('hide');
+                  });
       });
 
     });

@@ -66,6 +66,13 @@
   </div>
   <div class="form-group">
     <div class="col-xs-12">
+      <%= f.label :selling_price_cny, :class => 'control-label' %>
+      <%= f.text_field :selling_price_cny, :class => 'form-control', :pattern => '[0-9]*'%>
+    </div>
+    <%=f.error_span(:selling_price_cny) %>
+  </div>
+  <div class="form-group">
+    <div class="col-xs-12">
       <%= f.label :image_path, :class => 'control-label' %>
       <%= f.text_field :image_path, :class => 'form-control' %>
     </div>
