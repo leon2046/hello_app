@@ -4,7 +4,8 @@ FROM rails:latest
 ENV HOME /home/rails/webapp
 
 # Install PGsql dependencies and js engine
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+RUN apt-get update && apt-get install -y nodejs --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y mysql-client --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 WORKDIR $HOME
 
