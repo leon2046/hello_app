@@ -26,13 +26,12 @@ $(document).ready(function() {
                     $('#good_name_jp').val(rowData.itemName);
                     $('#good_price_jpy').val(rowData.itemPrice);
                     var profit_rate = 1 + (parseInt($('#good_profit_rate').val()) / 100 || 0.1);
-                    var selling_price_cny = Math.floor(rowData.itemPrice * current_rate * profit_rate);
+                    var selling_price_cny = Math.floor(parseFloat(rowData.itemPrice) * current_rate * profit_rate);
                     $('#good_selling_price_cny').val(selling_price_cny);
                     $('#good_image_path').val(rowData.imageUrl);
                     $modal.modal('hide');
-                  });
+                });
       });
-
     });
 
     return false;
@@ -42,4 +41,23 @@ $(document).ready(function() {
     $("#search_keyword").focus().val("");
     return false;
   });
-})
+
+  $("#good_price_jpy, #good_profit_rate").on("change", function(evt) {
+    var $rate = $("#good_profit_rate");
+    var $price_jpy = $("#good_price_jpy")
+    var profit_rate = parseFloat($rate.val()) || 10;
+    var price_jpy = parseInt($price_jpy.val()) || 0;
+    var price_cny = price_jpy * current_rate * (1 + profit_rate / 100);
+    $("#good_selling_price_cny").val(Math.floor(price_cny));
+
+    $rate.val(profit_rate);
+    $price_jpy.val(price_jpy);
+  });
+
+  $("#good_selling_price_cny").on("change", function(evt) {
+    var price_cny = parseFloat($(this).val());
+    var price_jpy = parseInt($("#good_price_jpy").val());
+    var profit_rate = ((price_cny / current_rate / price_jpy) - 1) * 100;
+    $("#good_profit_rate").val(Math.floor(profit_rate));
+  });
+});
