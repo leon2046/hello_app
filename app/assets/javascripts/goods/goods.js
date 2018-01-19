@@ -58,6 +58,6 @@ $(document).ready(function() {
     var price_cny = parseFloat($(this).val());
     var price_jpy = parseInt($("#good_price_jpy").val());
     var profit_rate = ((price_cny / current_rate / price_jpy) - 1) * 100;
-    $("#good_profit_rate").val(Math.floor(profit_rate));
+    $("#good_profit_rate").val(Math.floor(profit_rate) || 10);
   });
 });

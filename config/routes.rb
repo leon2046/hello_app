@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :customers
+  resources :customers, constraints: { id: /[0-9]+/ }
 
   constraints(id: /[0-9]+/) do
     resources :orders do

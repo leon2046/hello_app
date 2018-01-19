@@ -13,3 +13,10 @@ ja:
       good:
         one: "商品"
         other: "商品"
+    errors:
+      models:
+        good:
+          attributes:
+            selling_price_cny:
+              blank: "を入力してください"
+              not_a_number: "が数値ではない"
