@@ -27,8 +27,10 @@
   <dd><%= @order_detail.order_note %></dd>
 </dl>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
+<%= link_to t('.backToList', :default => t("helpers.links.backToList")),
               order_details_path, :class => 'btn btn-default'  %>
+<%= link_to t('.backToOrder', :default => t("helpers.links.backToOrder")),
+              order_path(@order_detail.order_id), :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_order_detail_path(@order_detail), :class => 'btn btn-default' %>
 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

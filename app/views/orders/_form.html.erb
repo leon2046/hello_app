@@ -18,7 +18,7 @@
   <div class="form-group">
     <%= f.label :customer_id, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.collection_select :customer_id, @customers, :id, :name, {:selected => :customer_id}, {:class => 'form-control'}%>
+      <%= f.collection_select :customer_id, @customers, :id, :name, {:selected => :customer_id}, {:class => 'form-control', :disabled => @order.persisted?}%>
     </div>
     <%=f.error_span(:customer_id) %>
   </div>

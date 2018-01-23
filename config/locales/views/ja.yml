@@ -61,7 +61,7 @@ ja:
       search: "注文検索"
       total_amount: "合計"
       prompt: "全て"
-      customer_order: "の注文"
+      customer_order_suffix: "の注文"
   order_details:
     index:
       title: "注文明細"
