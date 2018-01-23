@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  include OrdersHelper
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
@@ -22,6 +23,10 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @customers = Customer.all
+    unless @customers.nil?
+      @order.note = default_order_note_suffix(@customers[0])
+    end
   end
 
   # GET /orders/1/edit
