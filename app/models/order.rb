@@ -1,4 +1,6 @@
 class Order < ApplicationRecord
+  # include ConditionHelper
+
   belongs_to :customer
   has_many :orderDetails
   has_many :payments
@@ -7,14 +9,7 @@ class Order < ApplicationRecord
                 all_dispatch: 5, finished: 6, cancelled:99 }
 
   def self.search(params = {})
-    conditions = nil
-    params.each do |key, val|
-      if conditions.present?
-        conditions = conditions.and(arel_table[key].eq(val)) if !val.empty?
-      else
-        conditions = arel_table[key].eq(val) if !val.empty?
-      end
-    end
+    conditions = create_conditions(params)
     Order.joins(:customer).select("orders.*, customers.name as customer_name").where(conditions).order({id: :desc})
   end
 
