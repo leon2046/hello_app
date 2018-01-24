@@ -1,6 +1,4 @@
 class Order < ApplicationRecord
-  # include ConditionHelper
-
   belongs_to :customer
   has_many :orderDetails
   has_many :payments
@@ -9,8 +7,10 @@ class Order < ApplicationRecord
                 all_dispatch: 5, finished: 6, cancelled:99 }
 
   def self.search(params = {})
-    conditions = create_conditions(params)
-    Order.joins(:customer).select("orders.*, customers.name as customer_name").where(conditions).order({id: :desc})
+    Order.joins(:customer)
+    .left_joins(:orderDetails).group("order_details.order_id")
+    .select("orders.*, customers.name as customer_name, sum(order_details.total_amount) as total_amount")
+    .where(create_conditions(params)).order({id: :desc})
   end
 
   def self.select_options

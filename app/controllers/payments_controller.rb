@@ -36,7 +36,7 @@ class PaymentsController < ApplicationController
   # POST /payments.json
   def create
     @payment = Payment.new(payment_params)
-    @payment.customer_id = @Order.find(@payment.order_id).customer_id;
+    @payment.customer_id = Order.find(@payment.order_id).customer_id;
     respond_to do |format|
       if @payment.save
         format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
