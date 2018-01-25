@@ -2,7 +2,10 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   protect_from_forgery with: :exception
-  rescue_from SystemError, with: :system_error_handler
+  rescue_from SystemError, with: :error_handler
+  unless Rails.env.development?
+    rescue_from ActionController::RoutingError,   with: :error_handler
+  end
 
   before_action :logged_in_user, except: [:login, :authorize]
 
@@ -12,7 +15,7 @@ class ApplicationController < ActionController::Base
 
 
   private
-    def system_error_handler(exception)
+    def error_handler(exception)
       render 'errors/system_error'
     end
 
