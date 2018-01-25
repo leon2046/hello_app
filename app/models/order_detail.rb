@@ -17,7 +17,8 @@ class OrderDetail < ApplicationRecord
   }
 
   def self.search(params = {})
-    OrderDetail.joins(:good).select("order_details.*, goods.name_cn, goods.name_jp")
+    OrderDetail.joins(:good, :order).select("order_details.*, orders.note, goods.name_cn, goods.name_jp")
+    .where(create_conditions(params))
   end
 
   # todo raise system exception
