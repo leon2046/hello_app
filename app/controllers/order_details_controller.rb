@@ -20,7 +20,7 @@ class OrderDetailsController < ApplicationController
 
   # GET /order_details/new
   def new
-    @order_detail = OrderDetail.new(:order_id => params[:order_id])
+    @order_detail = OrderDetail.new(:order_id => params[:order_id], :quantity => 1)
   end
 
   # GET /order_details/1/edit
