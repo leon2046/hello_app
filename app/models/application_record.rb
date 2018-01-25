@@ -12,4 +12,10 @@ class ApplicationRecord < ActiveRecord::Base
     end
     return conditions
   end
+
+  def date_valid?(str, presence = false)
+    unless (!presence && (str.nil? || str.empty?))
+      !! Date.parse(str) rescue false
+    end
+  end
 end

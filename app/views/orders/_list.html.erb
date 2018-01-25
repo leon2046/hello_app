@@ -13,8 +13,8 @@
           <span class="label label-default"><%= t("activerecord.enums.order.status.#{order.status}") %></span>
         </p>
         <p>
-          <span class="label label-danger"><%= t "orders.index.total_amount"%>: <%= number_to_currency(order.attributes["total_amount"] || 0, :unit=>"CNY")%></span>
-          <span class="label label-danger"><%= t "orders.index.payment"%>:<%= number_to_currency(order.payments.sum(:amounts), :unit=>"CNY")
+          <span class="label label-danger"><%= t "orders.index.total_amount"%>: <%= number_to_currency(order.attributes["sum_total_amount"] || 0, :unit=>"CNY")%></span>
+          <span class="label label-danger"><%= t "orders.index.payment"%>:<%= number_to_currency(order.attributes["sum_amounts"] || 0, :unit=>"CNY")
             %></span>
         </p>
       </div>

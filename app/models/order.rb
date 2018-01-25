@@ -1,4 +1,6 @@
 class Order < ApplicationRecord
+  validate  :validate_customer_id
+
   belongs_to :customer
   has_many :orderDetails
   has_many :payments
@@ -8,12 +10,22 @@ class Order < ApplicationRecord
 
   def self.search(params = {})
     Order.joins(:customer)
-    .left_joins(:orderDetails).group("order_details.order_id")
-    .select("orders.*, customers.name as customer_name, sum(order_details.total_amount) as total_amount")
+    .joins("left join (select sum(order_details.total_amount) as sum_total_amount, order_details.order_id from
+              order_details group by order_details.order_id) order_details on orders.id = order_details.order_id")
+    .joins("left join (select sum(payments.amounts) as sum_amounts, payments.order_id from
+              payments group by payments.order_id) payments on payments.order_id = orders.id")
+    .select("orders.*, customers.name as customer_name, order_details.sum_total_amount, payments.sum_amounts")
     .where(create_conditions(params)).order({id: :desc})
   end
 
   def self.select_options
     Order.all.order(id: :desc)
   end
+
+  # todo raise system exception
+  def validate_customer_id
+    puts "validate_customer_id #{customer_id}"
+    !! Customer.find(customer_id) rescue errors.add(:customer_id, "is not exits.")
+  end
+
 end
