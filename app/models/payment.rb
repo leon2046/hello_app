@@ -15,11 +15,11 @@ class Payment < ApplicationRecord
 
   # todo raise system exception
   def validate_order_id
-    !! Order.find(order_id) rescue errors.add(:order_id, "is not exits.")
+    !! Order.find(order_id) rescue raise SystemError
   end
   # todo raise system exception
   def validate_customer_id
-    !! Customer.find(customer_id) rescue errors.add(:customer_id, "is not exits.")
+    !! Customer.find(customer_id) rescue raise SystemError
     errors.add(:customer_id, "is wrong.") unless Order.find(order_id).customer_id == customer_id
   end
 

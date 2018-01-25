@@ -24,8 +24,7 @@ class Order < ApplicationRecord
 
   # todo raise system exception
   def validate_customer_id
-    puts "validate_customer_id #{customer_id}"
-    !! Customer.find(customer_id) rescue errors.add(:customer_id, "is not exits.")
+    !! Customer.find(customer_id) rescue errors.addraise SystemError
   end
 
 end

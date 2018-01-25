@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
   include SessionsHelper
+
+  protect_from_forgery with: :exception
+  rescue_from SystemError, with: :system_error_handler
 
   before_action :logged_in_user, except: [:login, :authorize]
 
@@ -10,6 +12,10 @@ class ApplicationController < ActionController::Base
 
 
   private
+    def system_error_handler(exception)
+      render 'errors/system_error'
+    end
+
     def user_params
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)

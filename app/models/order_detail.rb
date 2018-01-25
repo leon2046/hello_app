@@ -22,12 +22,12 @@ class OrderDetail < ApplicationRecord
 
   # todo raise system exception
   def validate_good_id
-    !! Good.find(good_id) rescue errors.add(:good_id, "is not exits.")
+    !! Good.find(good_id) rescue raise SystemError
   end
-  
+
   # todo raise system exception
   def validate_order_id
-    !! Order.find(order_id) rescue errors.add(:order_id, "is not exits.")
+    !! Order.find(order_id) rescue raise SystemError
   end
 
 end
