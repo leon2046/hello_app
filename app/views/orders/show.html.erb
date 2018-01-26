@@ -27,4 +27,4 @@
             new_order_detail_path(:order_id => @order.id), :class => 'btn btn-default' %>
 
 <hr/>
-<%= render :partial => 'order_details/list', locals: {order_details: @order.orderDetails.search}%>
+<%= render :partial => 'order_details/list', locals: {order_details: list_order_details(@order)}%>

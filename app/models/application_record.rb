@@ -5,9 +5,9 @@ class ApplicationRecord < ActiveRecord::Base
     conditions = nil
     params.each do |key, val|
       if conditions.present?
-        conditions = conditions.and(arel_table[key].eq(val)) if !val.empty?
+        conditions = conditions.and(arel_table[key].eq(val)) if !val.to_s.empty?
       else
-        conditions = arel_table[key].eq(val) if !val.empty?
+        conditions = arel_table[key].eq(val) if !val.to_s.empty?
       end
     end
     return conditions

@@ -1,10 +1,10 @@
 class GoodsController < ApplicationController
   before_action :set_good, only: [:show, :edit, :update, :destroy]
-
+  before_action :search_params, only: [:search]
   # GET /goods
   # GET /goods.json
   def index
-    @goods = Good.all.order({id: :desc})
+    @goods = Good.where(attach_owner_user_id).order({id: :desc})
   end
 
   # GET /goods/1
@@ -23,23 +23,22 @@ class GoodsController < ApplicationController
 
   # POST /goods/search
   def search
-    @params = search_params
     if(@params["keyword"].empty?)
-      @goods = Good.all
+      @goods = Good.where(attach_owner_user_id)
     else
-      @goods = Good.goodsNameLike(@params["keyword"])
+      @goods = Good.goodsNameLike(@params)
     end
     render 'index'
   end
 
   # GET /goods/query
   def query
-    render :json => Good.goodsNameLike(params[:keyword])
+    render :json => Good.goodsNameLike(attach_owner_user_id(params))
   end
   # POST /goods
   # POST /goods.json
   def create
-    @good = Good.new(good_params)
+    @good = Good.new(attach_owner_user_id(good_params))
 
     respond_to do |format|
       if @good.save
@@ -79,7 +78,7 @@ class GoodsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_good
-      @good = Good.find(params[:id])
+      @good = check_owner_user_id(Good.find(params[:id]))
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -88,6 +87,7 @@ class GoodsController < ApplicationController
     end
 
     def search_params
-      params.require(:search).permit(:keyword)
+      @params = params.require(:search).permit(:keyword)
+      @params = attach_owner_user_id(@params)
     end
 end

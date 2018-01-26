@@ -1,14 +1,14 @@
 class OrderDetailsController < ApplicationController
   before_action :set_order_detail, only: [:show, :edit, :update, :destroy]
+  before_action :order_details_search_params, only: [:search]
   # GET /order_details
   # GET /order_details.json
   def index
-    @order_details = OrderDetail.search
+    @order_details = OrderDetail.search(attach_owner_user_id)
   end
 
   # POST /order_details/search
   def search
-    @params = order_details_search_params
     @order_details = OrderDetail.search(@params)
     render "index"
   end
@@ -20,7 +20,7 @@ class OrderDetailsController < ApplicationController
 
   # GET /order_details/new
   def new
-    @order_detail = OrderDetail.new(:order_id => params[:order_id], :quantity => 1)
+    @order_detail = OrderDetail.new(new_params)
   end
 
   # GET /order_details/1/edit
@@ -30,7 +30,7 @@ class OrderDetailsController < ApplicationController
   # POST /order_details
   # POST /order_details.json
   def create
-    @order_detail = OrderDetail.new(order_detail_params)
+    @order_detail = OrderDetail.new(attach_owner_user_id(order_detail_params))
 
     respond_to do |format|
       if @order_detail.save
@@ -70,7 +70,7 @@ class OrderDetailsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order_detail
-      @order_detail = OrderDetail.find(params[:id])
+      @order_detail = check_owner_user_id(OrderDetail.find(params[:id]))
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -84,6 +84,12 @@ class OrderDetailsController < ApplicationController
     end
 
     def order_details_search_params
-      params.require(:search).permit(:order_id, :order_status)
+      @params = params.require(:search).permit(:order_id, :order_status)
+      @params = attach_owner_user_id(@params)
+    end
+
+    def new_params
+      default_quantity = {:quantity => 1}
+      params.permit(:order_id).reverse_merge(default_quantity)
     end
 end

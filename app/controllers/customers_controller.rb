@@ -4,7 +4,7 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
   def index
-    @customers = Customer.all
+    @customers = Customer.where(attach_owner_user_id)
   end
 
   # GET /customers/1
@@ -24,7 +24,7 @@ class CustomersController < ApplicationController
   # POST /customers
   # POST /customers.json
   def create
-    @customer = Customer.new(customer_params)
+    @customer = Customer.new(attach_owner_user_id(customer_params))
 
     respond_to do |format|
       if @customer.save
@@ -64,11 +64,12 @@ class CustomersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_customer
-      @customer = Customer.find(params[:id])
+      @customer = check_owner_user_id(Customer.find(params[:id]))
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:name, :snsid, :note)
+      @params = params.require(:customer).permit(:name, :snsid, :note)
+      @params = attach_owner_user_id(@params)
     end
 end

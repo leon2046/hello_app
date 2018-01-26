@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180101121808) do
+ActiveRecord::Schema.define(version: 20180125072356) do
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20180101121808) do
     t.string "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_user_id"
+    t.index ["owner_user_id"], name: "index_customers_on_owner_user_id"
   end
 
   create_table "goods", force: :cascade do |t|
@@ -30,6 +32,8 @@ ActiveRecord::Schema.define(version: 20180101121808) do
     t.string "image_path"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_user_id"
+    t.index ["owner_user_id"], name: "index_goods_on_owner_user_id"
   end
 
   create_table "order_details", force: :cascade do |t|
@@ -44,8 +48,10 @@ ActiveRecord::Schema.define(version: 20180101121808) do
     t.string "order_note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_user_id"
     t.index ["good_id"], name: "index_order_details_on_good_id"
     t.index ["order_id"], name: "index_order_details_on_order_id"
+    t.index ["owner_user_id"], name: "index_order_details_on_owner_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -54,7 +60,9 @@ ActiveRecord::Schema.define(version: 20180101121808) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_user_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["owner_user_id"], name: "index_orders_on_owner_user_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -65,8 +73,10 @@ ActiveRecord::Schema.define(version: 20180101121808) do
     t.string "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_user_id"
     t.index ["customer_id"], name: "index_payments_on_customer_id"
     t.index ["order_id"], name: "index_payments_on_order_id"
+    t.index ["owner_user_id"], name: "index_payments_on_owner_user_id"
   end
 
   create_table "rates", force: :cascade do |t|
@@ -75,6 +85,8 @@ ActiveRecord::Schema.define(version: 20180101121808) do
     t.date "apply_end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_user_id"
+    t.index ["owner_user_id"], name: "index_rates_on_owner_user_id"
   end
 
   create_table "users", force: :cascade do |t|

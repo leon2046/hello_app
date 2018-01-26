@@ -21,7 +21,7 @@
     <%= f.label :order_id, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= select :order_detail, :order_id,
-            options_for_select(Order.select_options.map{|t| [t.note, t.id,
+            options_for_select(list_orders_for_combobox.map{|t| [t.note, t.id,
                                     {:disabled => @order_detail.order_id && t.id != @order_detail.order_id}
                                   ]}),
                                 {:selected => @order_detail.order_id,
