@@ -16,7 +16,7 @@ end
 
 group :production do
   # Use mysql as the database for Active Record
-#  gem 'mysql2', '>= 0.3.18', '< 0.5'
+  # gem 'mysql2', '>= 0.3.18', '< 0.5'
 end
 
 # Use Puma as the app server
@@ -68,4 +68,4 @@ gem 'rest-client'
 
 gem "twitter-bootstrap-rails"
 
-#gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?

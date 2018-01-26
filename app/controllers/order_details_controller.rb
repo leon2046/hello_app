@@ -1,6 +1,7 @@
 class OrderDetailsController < ApplicationController
   before_action :set_order_detail, only: [:show, :edit, :update, :destroy]
   before_action :order_details_search_params, only: [:search]
+  before_action :check_good_id, only: [:update, :create]
   # GET /order_details
   # GET /order_details.json
   def index
@@ -31,7 +32,6 @@ class OrderDetailsController < ApplicationController
   # POST /order_details.json
   def create
     @order_detail = OrderDetail.new(attach_owner_user_id(order_detail_params))
-
     respond_to do |format|
       if @order_detail.save
         format.html { redirect_to @order_detail, notice: 'Order detail was successfully created.' }
@@ -89,7 +89,11 @@ class OrderDetailsController < ApplicationController
     end
 
     def new_params
-      default_quantity = {:quantity => 1}
-      params.permit(:order_id).reverse_merge(default_quantity)
+      params.permit(:order_id).merge({:quantity => 1})
+    end
+
+    def check_good_id
+      params = order_detail_params
+      raise SystemError if Good.where(attach_owner_user_id({:id => params[:good_id]})).empty?
     end
 end

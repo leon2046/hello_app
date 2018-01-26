@@ -21,8 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def attach_owner_user_id(params = nil)
-    user_hash = {:owner_user_id => @current_user.id}
-    params = params.nil? ? user_hash : params.merge(user_hash)
+    owner_user_hash = {:owner_user_id => @current_user.id}.merge(params || {})
   end
 
   private

@@ -1,6 +1,7 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
   before_action :payment_search_params, only: [:search]
+  before_action :check_order_info, only: [:update, :create]
   # GET /payments
   # GET /payments.json
   def index
@@ -35,8 +36,6 @@ class PaymentsController < ApplicationController
   # POST /payments.json
   def create
     @payment = Payment.new(attach_owner_user_id(payment_params))
-    @payment.customer_id = Order.find(@payment.order_id).customer_id;
-
     respond_to do |format|
       if @payment.save
         format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
@@ -89,5 +88,11 @@ class PaymentsController < ApplicationController
 
     def new_params
       params.permit(:order_id, :customer_id)
+    end
+
+    def check_order_info
+      params = payment_params
+      raise SystemError if Order.where(attach_owner_user_id({:id => params[:order_id],
+                                                              :customer_id => params[:customer_id]})).empty?
     end
 end

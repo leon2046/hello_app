@@ -33,7 +33,8 @@ class GoodsController < ApplicationController
 
   # GET /goods/query
   def query
-    render :json => Good.goodsNameLike(attach_owner_user_id(params))
+    keyword_hash = {:keyword => params[:keyword]}
+    render :json => Good.goodsNameLike(attach_owner_user_id(keyword_hash))
   end
   # POST /goods
   # POST /goods.json
