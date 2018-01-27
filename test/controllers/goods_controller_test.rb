@@ -2,7 +2,9 @@ require 'test_helper'
 
 class GoodsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    set_owner_user_id(Good)
     @good = goods(:one)
+    do_login
   end
 
   test "should get index" do
@@ -17,7 +19,7 @@ class GoodsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create good" do
     assert_difference('Good.count') do
-      post goods_url, params: { good: { image_path: @good.image_path, jan_cd: @good.jan_cd, name_cn: @good.name_cn, name_jp: @good.name_jp, price_jpy: @good.price_jpy, profit_rate: @good.profit_rate } }
+      post goods_url, params: { good: create_params }
     end
 
     assert_redirected_to good_url(Good.last)
@@ -34,7 +36,7 @@ class GoodsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update good" do
-    patch good_url(@good), params: { good: { image_path: @good.image_path, jan_cd: @good.jan_cd, name_cn: @good.name_cn, name_jp: @good.name_jp, price_jpy: @good.price_jpy, profit_rate: @good.profit_rate } }
+    patch good_url(@good), params: { good: create_params }
     assert_redirected_to good_url(@good)
   end
 
@@ -44,5 +46,11 @@ class GoodsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to goods_url
+  end
+
+  def create_params
+    { image_path: @good.image_path, jan_cd: @good.jan_cd, name_cn: @good.name_cn,
+      name_jp: @good.name_jp, price_jpy: @good.price_jpy, profit_rate: @good.profit_rate,
+      selling_price_cny: @good.selling_price_cny }
   end
 end

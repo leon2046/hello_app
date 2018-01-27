@@ -7,7 +7,9 @@ one:
   quantity: 1
   purchase_price: 1
   selling_price: 1
-  order_status: MyString
+  total_amount: 1
+  order_status: 0
+  order_note: note
 
 two:
   order_id: 1
@@ -16,4 +18,6 @@ two:
   quantity: 1
   purchase_price: 1
   selling_price: 1
-  order_status: MyString
+  total_amount: 1
+  order_status: 0
+  order_note: note

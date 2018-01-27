@@ -1,18 +1,23 @@
 require 'test_helper'
 
+
 class SessionsControllerTest < ActionDispatch::IntegrationTest
-  test "should get new" do
-    get sessions_new_url
-    assert_response :success
+  # include LoginHelper
+
+  test "should be login" do
+      do_login
+      assert_redirected_to new_good_path
   end
 
-  test "should get create" do
-    get sessions_create_url
-    assert_response :success
+  test "should be not login" do
+      user = User.new(:account => "erwrw@test.com")
+      do_login(user)
+      assert_response :success
+      assert_not_nil flash[:danger]
   end
 
-  test "should get destroy" do
-    get sessions_destroy_url
+  test "should get lgoin" do
+    get login_path
     assert_response :success
   end
 

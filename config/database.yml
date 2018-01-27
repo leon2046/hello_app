@@ -17,13 +17,21 @@ development:
   <<: *default
   adapter: sqlite3
   database: db/development.sqlite3
+  # adapter: mysql2
+  # encoding: utf8
+  # pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # database: jpbuyer_development
+  # username: jpbuyer
+  # password: ijh98y6jpbuyer
+  # host: 192.168.11.12
+  # port: 3307
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: jpbuyer_development
+  database: db/test.sqlite3
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -47,4 +55,4 @@ test:
 production:
   <<: *default
   database: jpbuyer_production
-  #password: <%= ENV['MYSQL_DATABASE_PASSWORD'] %>
+  password: <%= ENV['MYSQL_DATABASE_PASSWORD'] %>

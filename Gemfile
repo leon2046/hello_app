@@ -12,8 +12,9 @@ gem 'rails', '~> 5.1.2'
 group :development do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+  # Use mysql as the database for Active Record
+  gem 'mysql2', '>= 0.3.18', '< 0.5'
 end
-
 group :production do
   # Use mysql as the database for Active Record
   # gem 'mysql2', '>= 0.3.18', '< 0.5'

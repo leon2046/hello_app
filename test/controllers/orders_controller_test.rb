@@ -2,7 +2,11 @@ require 'test_helper'
 
 class OrdersControllerTest < ActionDispatch::IntegrationTest
   setup do
+    set_owner_user_id(Order)
     @order = orders(:one)
+    @customer = customers(:one)
+    Order.update_all(:customer_id => @customer.id)
+    do_login
   end
 
   test "should get index" do
@@ -17,7 +21,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create order" do
     assert_difference('Order.count') do
-      post orders_url, params: { order: {  } }
+      post orders_url, params: { order: create_params }
     end
 
     assert_redirected_to order_url(Order.last)
@@ -34,7 +38,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update order" do
-    patch order_url(@order), params: { order: {  } }
+    patch order_url(@order), params: { order: create_params }
     assert_redirected_to order_url(@order)
   end
 
@@ -44,5 +48,9 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to orders_url
+  end
+
+  def create_params
+    { customer_id: @customer.id, note: @order.note, status: @order.status }
   end
 end
