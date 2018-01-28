@@ -111,7 +111,7 @@
     <div class="col-lg-offset-2 col-lg-10">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                order_details_path, :class => 'btn btn-default' %>
+                order_path(@order_detail.order_id), :class => 'btn btn-default' %>
     </div>
   </div>
 
