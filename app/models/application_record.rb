@@ -15,7 +15,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   def date_valid?(str, presence = false)
     unless (!presence && (str.nil? || str.empty?))
-      !! Date.parse(str) rescue false
+      Date.parse(str) rescue false
     end
   end
 end

@@ -21,14 +21,14 @@ class OrderDetail < ApplicationRecord
     .where(create_conditions(params))
   end
 
-  # todo raise system exception
+  # raise system exception
   def validate_good_id
-    !! Good.find(good_id) rescue raise SystemError
+    Good.find(good_id) rescue raise SystemError
   end
 
-  # todo raise system exception
+  # raise system exception
   def validate_order_id
-    !! Order.find(order_id) rescue raise SystemError
+    Order.find(order_id) rescue raise SystemError
   end
 
 end

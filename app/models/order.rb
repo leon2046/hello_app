@@ -18,9 +18,9 @@ class Order < ApplicationRecord
     .where(create_conditions(params)).order({id: :desc})
   end
 
-  # todo raise system exception
+  # raise system exception
   def validate_customer_id
-    !! Customer.find(customer_id) rescue errors.addraise SystemError
+    Customer.find(customer_id) rescue errors.addraise SystemError
   end
 
 end

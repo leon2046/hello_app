@@ -13,13 +13,13 @@ class Payment < ApplicationRecord
       .where(create_conditions(params)).order({id: :desc})
   end
 
-  # todo raise system exception
+  # raise system exception
   def validate_order_id
-    !! Order.find(order_id) rescue raise SystemError
+    Order.find(order_id) rescue raise SystemError
   end
-  # todo raise system exception
+  # raise system exception
   def validate_customer_id
-    !! Customer.find(customer_id) rescue raise SystemError
+    Customer.find(customer_id) rescue raise SystemError
     errors.add(:customer_id, "is wrong.") unless Order.find(order_id).customer_id == customer_id
   end
 
