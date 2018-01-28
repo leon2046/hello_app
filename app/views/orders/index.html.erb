@@ -9,7 +9,7 @@
     <div class="col-xs-12">
       <div class="input-group">
         <span class="input-group-addon"><%= (t '.customer') %></span>
-        <%= f.collection_select :customer_id, Customer.all, :id, :name, {:selected =>@params && @params["customer_id"], :include_blank => (t '.prompt')}, {:class => 'form-control'}%>
+        <%= f.collection_select :customer_id, list_customers_for_combobox, :id, :name, {:selected =>@params && @params["customer_id"], :include_blank => (t '.prompt')}, {:class => 'form-control'}%>
         <span class="input-group-addon">
           <span class="glyphicon glyphicon-remove-circle"></span>
         </span>

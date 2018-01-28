@@ -1,0 +1,3 @@
+class SystemError < StandardError
+
+end

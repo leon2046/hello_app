@@ -10,38 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180101121808) do
+ActiveRecord::Schema.define(version: 20180125072356) do
 
-  create_table "admin_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name"
-    t.string "mail"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "customers", force: :cascade do |t|
     t.string "name"
     t.string "snsid"
     t.string "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_user_id"
+    t.index ["owner_user_id"], name: "index_customers_on_owner_user_id"
   end
 
-  create_table "goods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "goods", force: :cascade do |t|
     t.string "jan_cd", limit: 13
     t.string "name_jp"
     t.string "name_cn"
     t.integer "price_jpy"
-    t.integer "profit_rate"
     t.integer "selling_price_cny"
+    t.integer "profit_rate"
     t.string "image_path"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_user_id"
+    t.index ["owner_user_id"], name: "index_goods_on_owner_user_id"
   end
 
-  create_table "order_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "order_id"
-    t.bigint "good_id"
+  create_table "order_details", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "good_id"
     t.date "order_time"
     t.integer "quantity"
     t.integer "purchase_price"
@@ -51,40 +48,48 @@ ActiveRecord::Schema.define(version: 20180101121808) do
     t.string "order_note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_user_id"
     t.index ["good_id"], name: "index_order_details_on_good_id"
     t.index ["order_id"], name: "index_order_details_on_order_id"
+    t.index ["owner_user_id"], name: "index_order_details_on_owner_user_id"
   end
 
-  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "customer_id"
+  create_table "orders", force: :cascade do |t|
+    t.integer "customer_id"
     t.string "note"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_user_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["owner_user_id"], name: "index_orders_on_owner_user_id"
   end
 
-  create_table "payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "order_id"
-    t.bigint "customer_id"
+  create_table "payments", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "customer_id"
     t.integer "amounts"
     t.string "payment_method"
     t.string "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_user_id"
     t.index ["customer_id"], name: "index_payments_on_customer_id"
     t.index ["order_id"], name: "index_payments_on_order_id"
+    t.index ["owner_user_id"], name: "index_payments_on_owner_user_id"
   end
 
-  create_table "rates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.float "rate", limit: 24
+  create_table "rates", force: :cascade do |t|
+    t.float "rate"
     t.date "apply_start_date"
     t.date "apply_end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_user_id"
+    t.index ["owner_user_id"], name: "index_rates_on_owner_user_id"
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade do |t|
     t.string "account"
     t.string "password"
     t.datetime "created_at", null: false

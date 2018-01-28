@@ -18,14 +18,29 @@
   <div class="form-group">
     <%= f.label :order_id, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.collection_select :order_id, Order.select_options, :id, :note, {:selected => @payment.order_id}, {:class => 'form-control'}%>
+      <%= select :payment, :order_id,
+            options_for_select(list_orders_for_combobox.map{|t| [t.note, t.id,
+                                                                {:disabled => @payment.order_id && t.id != @payment.order_id}
+                                                              ]}),
+                                {:selected => @payment.order_id},
+                                {:class => 'form-control'}
+                              %>
+
     </div>
     <%=f.error_span(:order_id) %>
   </div>
   <div class="form-group">
     <%= f.label :customer_id, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.collection_select :customer_id, Customer.all, :id, :name, {:selected => @payment.customer_id}, {:class => 'form-control'}%>
+      <%= select :payment, :customer_id,
+            options_for_select(list_customers_for_combobox.map{|t| [t.name, t.id,
+                                                                    {:disabled => @payment.customer_id && t.id != @payment.customer_id}
+                                                                  ]}),
+                                {:selected => @payment.customer_id},
+                                {:class => 'form-control'}
+                              %>
+
+
     </div>
     <%=f.error_span(:customer_id) %>
   </div>

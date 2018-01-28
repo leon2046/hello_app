@@ -1,4 +1,14 @@
 class OrderDetail < ApplicationRecord
+  validates :good_id, numericality: {only_integer: true}, presence: true
+  validates :quantity, numericality: {only_integer: true, greater_than: 0}, presence: true
+  validates :purchase_price, numericality: {greater_than: 0}, presence: true
+  validates :selling_price, numericality: {greater_than: 0}, presence: true
+  validates :total_amount, numericality: {greater_than: 0}, presence: true
+  validates :order_note, length: {maximum: 255}, presence: false
+  validate  :validate_order_id
+  validate  :validate_good_id
+
+
   belongs_to :order
   has_one :good, :foreign_key => :id, :primary_key => :good_id
 
@@ -7,15 +17,18 @@ class OrderDetail < ApplicationRecord
   }
 
   def self.search(params = {})
-    conditions = nil
-    params.each do |key, val|
-      if conditions.present?
-        conditions = conditions.and(arel_table[key].eq(val)) if !val.empty?
-      else
-        conditions = arel_table[key].eq(val) if !val.empty?
-      end
-    end
-    OrderDetail.joins(:good).select("order_details.*, goods.name_cn, goods.name_jp").where(conditions)
-    .order({order_id: :desc}, {id: :desc})
+    OrderDetail.joins(:good, :order).select("order_details.*, orders.note, goods.name_cn, goods.name_jp")
+    .where(create_conditions(params))
   end
+
+  # raise system exception
+  def validate_good_id
+    Good.find(good_id) rescue raise SystemError
+  end
+
+  # raise system exception
+  def validate_order_id
+    Order.find(order_id) rescue raise SystemError
+  end
+
 end

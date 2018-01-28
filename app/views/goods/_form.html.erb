@@ -1,3 +1,5 @@
+<% current_rate = Rate.current_rate.first.rate %>
+
 <%= form_for @good, :html => { :class => "form-horizontal good" } do |f| %>
 
   <% if @good.errors.any? %>
@@ -67,6 +69,7 @@
   <div class="form-group">
     <div class="col-xs-12">
       <%= f.label :selling_price_cny, :class => 'control-label' %>
+      <%= f.label "current_rate_label", "#{current_rate}" %>
       <%= f.text_field :selling_price_cny, :class => 'form-control', :pattern => '[0-9]*'%>
     </div>
     <%=f.error_span(:selling_price_cny) %>
@@ -100,3 +103,6 @@
   </div>
 </div>
 <%= javascript_include_tag "goods/goods" %>
+<%= javascript_tag do%>
+var current_rate = <%= current_rate %>
+<% end %>

@@ -3,9 +3,9 @@
 one:
   customer_id: 1
   note: MyString
-  status: MyString
+  status: 0
 
 two:
   customer_id: 1
   note: MyString
-  status: MyString
+  status: 0

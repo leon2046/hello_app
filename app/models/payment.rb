@@ -1,17 +1,26 @@
 class Payment < ApplicationRecord
+
+  validates :order_id, numericality: {only_integer: true}, presence: true
+  validates :customer_id, numericality: {only_integer: true}, presence: true
+  validate  :validate_order_id
+  validate  :validate_customer_id
+
   belongs_to :order
   belongs_to :customer
 
   def self.search(params = {})
-    conditions = nil
-    params.each do |key, val|
-      if conditions.present?
-        conditions = conditions.and(arel_table[key].eq(val)) if !val.empty?
-      else
-        conditions = arel_table[key].eq(val) if !val.empty?
-      end
-    end
     Payment.joins(:customer, :order).select("payments.*, customers.name as customer_name, orders.note as order_node")
-      .where(conditions).order({id: :desc})
+      .where(create_conditions(params)).order({id: :desc})
   end
+
+  # raise system exception
+  def validate_order_id
+    Order.find(order_id) rescue raise SystemError
+  end
+  # raise system exception
+  def validate_customer_id
+    Customer.find(customer_id) rescue raise SystemError
+    errors.add(:customer_id, "is wrong.") unless Order.find(order_id).customer_id == customer_id
+  end
+
 end

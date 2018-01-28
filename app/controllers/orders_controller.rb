@@ -1,15 +1,16 @@
 class OrdersController < ApplicationController
+  include OrdersHelper
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :order_search_params, only: [:search]
 
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.search
+    @orders = Order.search(attach_owner_user_id)
   end
 
   # POST /orders/search
   def search
-    @params = order_search_params
     @orders = Order.search(@params)
     render "index"
   end
@@ -22,17 +23,21 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @customers = Customer.where(attach_owner_user_id)
+    unless @customers.nil?
+      @order.note = default_order_note_suffix_helper(@customers[0])
+    end
   end
 
   # GET /orders/1/edit
   def edit
+    @customers = Customer.where(attach_owner_user_id)
   end
 
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
-
+    @order = Order.new(attach_owner_user_id(order_params))
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
@@ -71,7 +76,7 @@ class OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = Order.find(params[:id])
+      @order = check_owner_user_id(Order.find(params[:id]))
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -80,6 +85,7 @@ class OrdersController < ApplicationController
     end
 
     def order_search_params
-      params.require(:search).permit(:customer_id, :status)
+      @params = params.require(:search).permit(:customer_id, :status)
+      @params = attach_owner_user_id(@params)
     end
 end

@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class CustomersControllerTest < ActionDispatch::IntegrationTest
+
   setup do
+    set_owner_user_id(Customer)
     @customer = customers(:one)
+    do_login
   end
 
   test "should get index" do
@@ -17,7 +20,7 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create customer" do
     assert_difference('Customer.count') do
-      post customers_url, params: { customer: {  } }
+      post customers_url, params: { customer: create_params }
     end
 
     assert_redirected_to customer_url(Customer.last)
@@ -34,7 +37,7 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update customer" do
-    patch customer_url(@customer), params: { customer: {  } }
+    patch customer_url(@customer), params: { customer: create_params }
     assert_redirected_to customer_url(@customer)
   end
 
@@ -44,5 +47,9 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to customers_url
+  end
+
+  def create_params
+    { :name => @customer.name, :snsid => @customer.snsid, :note => @customer.note }
   end
 end

@@ -3,9 +3,9 @@
 one:
   rate: 1.5
   apply_start_date: 2018-01-01
-  apply_end_date: 2018-01-01
+  apply_end_date: 2100-01-01
 
 two:
   rate: 1.5
-  apply_start_date: 2018-01-01
-  apply_end_date: 2018-01-01
+  apply_start_date: 2100-01-02
+  apply_end_date: 2218-01-01

@@ -24,6 +24,8 @@ $(document).ready(function() {
             $("#order_detail_good_id").val(rowData.id);
             $("#order_detail_purchase_price").val(rowData.price_jpy);
             $("#order_detail_selling_price").val(rowData.selling_price_cny);
+            var quantity = parseInt($("#order_detail_quantity").val(), 10);
+            $("#order_detail_total_amount").val(rowData.selling_price_cny * quantity);
             $menu.removeClass("open");
             return false;
           })
@@ -33,8 +35,8 @@ $(document).ready(function() {
   });
 
   $("#order_detail_quantity, #order_detail_selling_price").on("change", function () {
-    var quantity = parseInt($("#order_detail_quantity").val());
-    var price = parseInt($("#order_detail_selling_price").val());
+    var quantity = parseInt($("#order_detail_quantity").val(), 10);
+    var price = parseInt($("#order_detail_selling_price").val(), 10);
     var amount = price * quantity;
     $("#order_detail_total_amount").val(amount || "");
   });

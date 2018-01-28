@@ -12,25 +12,37 @@ Rails.application.routes.draw do
 
   delete '/logout', to: 'sessions#destroy'
 
-  resources :goods do
-    collection do
-      post :search
+  constraints(id: /[0-9]+/) do
+    resources :goods do
+      collection do
+        post :search
+      end
     end
   end
-  resources :customers
-  resources :orders do
-    collection do
-      post :search
+
+  resources :customers, constraints: { id: /[0-9]+/ }
+
+  constraints(id: /[0-9]+/) do
+    resources :orders do
+      collection do
+        post :search
+      end
     end
   end
-  resources :order_details do
-    collection do
-      post  :search
+
+  constraints(id: /[0-9]+/) do
+    resources :order_details do
+      collection do
+        post  :search
+      end
     end
   end
-  resources :payments do
-    collection do
-      post  :search
+
+  constraints(id: /[0-9]+/) do
+    resources :payments do
+      collection do
+        post  :search
+      end
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

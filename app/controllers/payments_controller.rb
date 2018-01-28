@@ -1,15 +1,15 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
-
+  before_action :payment_search_params, only: [:search]
+  before_action :check_order_info, only: [:update, :create]
   # GET /payments
   # GET /payments.json
   def index
-    @payments = Payment.search
+    @payments = Payment.search(attach_owner_user_id)
   end
 
   # POST /orders/search
   def search
-    @params = payment_search_params
     @payments = Payment.search(@params)
     render "index"
   end
@@ -35,8 +35,7 @@ class PaymentsController < ApplicationController
   # POST /payments
   # POST /payments.json
   def create
-    @payment = Payment.new(payment_params)
-    @payment.customer_id = @Order.find(@payment.order_id).customer_id;
+    @payment = Payment.new(attach_owner_user_id(payment_params))
     respond_to do |format|
       if @payment.save
         format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
@@ -75,7 +74,7 @@ class PaymentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_payment
-      @payment = Payment.find(params[:id])
+      @payment = check_owner_user_id(Payment.find(params[:id]))
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -84,10 +83,16 @@ class PaymentsController < ApplicationController
     end
 
     def payment_search_params
-      params.require(:search).permit(:order_id, :customer_id)
+      @params = params.require(:search).permit(:order_id, :customer_id)
     end
 
     def new_params
       params.permit(:order_id, :customer_id)
+    end
+
+    def check_order_info
+      params = payment_params
+      raise SystemError if Order.where(attach_owner_user_id({:id => params[:order_id],
+                                                              :customer_id => params[:customer_id]})).empty?
     end
 end
