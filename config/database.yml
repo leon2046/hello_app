@@ -50,7 +50,7 @@ production:
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: jpbuyer_production
-  username: jpbuyer
+  username: <%= ENV['MYSQL_DATABASE_USER'] %>
   password: <%= ENV['MYSQL_DATABASE_PASSWORD'] %>
   host: 192.168.11.12
   port: 3307
