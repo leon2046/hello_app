@@ -3,7 +3,8 @@
 one:
   account: test@test.com
   password: MyString
-
+  password_digest: $2a$04$kDotMIwxGtVQrOX7ClhcyulnFnfEk3DSWWDg5h4JtqK7szS3Zy9vO
 two:
   account: test1@test.com
   password: MyString
+  password_digest: $2a$04$kDotMIwxGtVQrOX7ClhcyulnFnfEk3DSWWDg5h4JtqK7szS3Zy9vO

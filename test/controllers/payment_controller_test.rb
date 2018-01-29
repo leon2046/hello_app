@@ -21,7 +21,7 @@ class PaymentControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-    get new_payment_url
+    get new_payment_url, params: { order_id: @order.id, customer_id: @customer.id}
     assert_response :success
   end
 

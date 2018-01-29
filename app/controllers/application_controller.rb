@@ -24,6 +24,14 @@ class ApplicationController < ActionController::Base
     owner_user_hash = {:owner_user_id => @current_user.id}.merge(params || {})
   end
 
+  def check_order_id
+    raise SystemError if Order.where(attach_owner_user_id({:id => params[:order_id]})).empty?
+  end
+
+  def check_customer_id
+    raise SystemError if Customer.where(attach_owner_user_id({:id => params[:customer_id]})).empty?
+  end
+
   private
     def error_handler(exception)
       render 'errors/system_error'

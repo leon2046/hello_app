@@ -1,15 +1,11 @@
 Rails.application.routes.draw do
   get 'top/index'
-
   get 'rakuten/query'
   get 'goods/query'
 
   get '/login', to: 'sessions#login'
-
   post '/login', to: 'sessions#authorize'
-
   get '/logout', to: 'sessions#destroy'
-
   delete '/logout', to: 'sessions#destroy'
 
   constraints(id: /[0-9]+/) do

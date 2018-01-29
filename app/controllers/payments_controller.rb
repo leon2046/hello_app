@@ -87,6 +87,8 @@ class PaymentsController < ApplicationController
     end
 
     def new_params
+      check_customer_id
+      check_order_id
       params.permit(:order_id, :customer_id)
     end
 

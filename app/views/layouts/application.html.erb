@@ -60,6 +60,20 @@
         </div>
       </div><!-- /.container-fluid -->
     </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <label class=" pull-right">
+            <% if logged_in? %>
+              <%= link_to t("helpers.titles.logout", :default => 'Logout'),
+              logout_path,
+              :method => 'delete',
+              :data => { :confirm => t("helpers.links.logout.confirm", :default => 'Are you sure you want to logou?') }
+              %>
+            <% end %>
+        </div>
+      </div>
+    </div>
 
     <div class="container">
       <div class="row">

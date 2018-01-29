@@ -6,11 +6,11 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should be login" do
       do_login
-      assert_redirected_to new_good_path
+      assert_redirected_to orders_path
   end
 
   test "should be not login" do
-      user = User.new(:account => "erwrw@test.com")
+      user = {:account => "erwrw@test.com"}
       do_login(user)
       assert_response :success
       assert_not_nil flash[:danger]

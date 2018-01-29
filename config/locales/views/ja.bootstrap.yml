@@ -27,9 +27,12 @@ ja:
       payment: "支払いを追加"
       backToList: "一覧に戻る"
       backToOrder: "注文に戻る"
+      logout:
+        confirm: "ログアウトしますか？"
     titles:
       edit: "編集 %{model}"
       save: "保存 %{model}"
       new: "新規 %{model}"
       delete: "削除 %{model}"
       cancel: "取消"
+      logout: "ログアウト"

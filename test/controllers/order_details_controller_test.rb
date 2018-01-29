@@ -20,7 +20,7 @@ class OrderDetailsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-    get new_order_detail_url
+    get new_order_detail_url, params: {order_id: @order.id}
     assert_response :success
   end
 

@@ -89,6 +89,7 @@ class OrderDetailsController < ApplicationController
     end
 
     def new_params
+      check_order_id
       params.permit(:order_id).merge({:quantity => 1})
     end
 
