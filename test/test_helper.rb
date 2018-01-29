@@ -7,10 +7,10 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 
-  def do_login(user = nil)
-    user = user || User.first
+  def do_login(param = nil)
+    param = param || User.first
     pwd_text = 'MyString'
-    post login_path, params:{ :session => {:account=> user[:account], :password => pwd_text}}
+    post login_path, params:{ :session => {:account=> param[:account], :password => pwd_text}}
   end
 
   def set_owner_user_id(obj)
