@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def login
+    log_out
   end
 
   def authorize
