@@ -28,10 +28,6 @@ class PaymentsController < ApplicationController
   def edit
   end
 
-  # GET /payments/query
-  def query
-    render :json => Payment.paymentsNameLike(params[:keyword])
-  end
   # POST /payments
   # POST /payments.json
   def create
