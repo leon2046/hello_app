@@ -6,7 +6,7 @@ class Good < ApplicationRecord
   validates :selling_price_cny, numericality: {greater_than: 0}, presence: true
   validates :profit_rate, numericality: {only_integer: true, greater_than: 0}, presence: true
 
-  scope :goodsNameLike, ->(params) {
+  scope :goods_name_like, ->(params) {
     keyword = "%#{sanitize_sql_like(params[:keyword])}%"
     where("owner_user_id = ? AND (name_jp LIKE ? or name_cn LIKE ?)", params[:owner_user_id], keyword, keyword)
   }

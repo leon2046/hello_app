@@ -26,7 +26,7 @@ class GoodsController < ApplicationController
     if(@params["keyword"].empty?)
       @goods = Good.where(attach_owner_user_id)
     else
-      @goods = Good.goodsNameLike(@params)
+      @goods = Good.goods_name_like(@params)
     end
     render 'index'
   end
@@ -34,7 +34,7 @@ class GoodsController < ApplicationController
   # GET /goods/query
   def query
     keyword_hash = {:keyword => params[:keyword]}
-    render :json => Good.goodsNameLike(attach_owner_user_id(keyword_hash))
+    render :json => Good.goods_name_like(attach_owner_user_id(keyword_hash))
   end
   # POST /goods
   # POST /goods.json
