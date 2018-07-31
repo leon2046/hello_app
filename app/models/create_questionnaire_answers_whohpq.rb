@@ -1,0 +1,3 @@
+class CreateQuestionnaireAnswersWhohpq < ApplicationRecord
+  
+end

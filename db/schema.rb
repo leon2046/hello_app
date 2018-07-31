@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129022806) do
+ActiveRecord::Schema.define(version: 20180731132501) do
+
+  create_table "create_questionnaire_answers_whohpqs", force: :cascade do |t|
+    t.integer "company_pk"
+    t.integer "user_pk"
+    t.integer "answer1"
+    t.integer "answer2"
+    t.integer "answer3"
+    t.datetime "answered_at"
+    t.string "created_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "create_questionnaire_company_settings", force: :cascade do |t|
+    t.integer "company_pk"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string "name"

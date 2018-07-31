@@ -1,0 +1,2 @@
+class CreateQuestionnaireCompanySetting < ApplicationRecord
+end
